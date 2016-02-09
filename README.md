@@ -30,13 +30,14 @@ The perform the _actual_ testing the library offers several macros:
 
 * `ALLCLOSE_DOUBLE(a, b, N, atol, rtol)` 
 
+
 	Checks if two double arrays `a` and `b` of length `N` are _element-wise_ equal within a tolerance. The tolerance values are positive, typically very small double precision numbers. The relative difference (rtol * abs(b)) and the absolute difference atol are added together to compare against the absolute difference between `a` and `b`.
- 
-	![all_close_equation](file:doc/all_close.png)
+
+	<img src="https://raw.githubusercontent.com/thfabian/tinytest/master/doc/all_close.png" alt="Allcose"/>
   
 	If either array contains one or more NaNs, the check fails. Infs are treated as equal if they are in the same place and of the same sign in both arrays.
   
-  	If an assertion fails an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`.
+	If an assertion fails an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`.
 
 	Note: There is a shorhand macro `ALLCLOSE_DOUBLE_3(a, b, N)` which automatically sets `atol = 1e-08` and `rtol = 1e-05`.  
 
