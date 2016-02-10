@@ -33,7 +33,6 @@ before_script:
   - make
 
 script:
-   - cd build
    - ./tinytest_pass
    - ./tinytest_fails
    - ./tinytest_signal
