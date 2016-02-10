@@ -2,9 +2,9 @@ install:
   - if [ "$CC" = "gcc" ]; then export CC="gcc-4.9"; fi
   - if [ "$CC" = "clang" ] && [ "$TRAVIS_OS_NAME" = "linux" ]; then export CC="clang-3.7"; fi
   - echo ${PATH}
-  - echo ${CXX}
-  - ${CXX} --version
-  - ${CXX} -v
+  - echo ${CC}
+  - ${CC} --version
+  - ${CC} -v
 
 addons:
   apt:
@@ -14,6 +14,7 @@ addons:
     packages:
       - gcc-4.9
       - clang-3.7
+      - cmake
     
 os:
   - linux
