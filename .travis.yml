@@ -1,0 +1,42 @@
+install:
+  - if [ "$CC" = "gcc" ]; then export CC="gcc-4.9"; fi
+  - if [ "$CC" = "clang" ] && [ "$TRAVIS_OS_NAME" = "linux" ]; then export CC="clang-3.7"; fi
+  - echo ${PATH}
+  - echo ${CXX}
+  - ${CXX} --version
+  - ${CXX} -v
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.7
+    packages:
+      - gcc-4.9
+      - clang-3.7
+    
+os:
+  - linux
+  - osx
+
+language: c
+
+compiler:
+  - clang
+  - gcc
+
+before_script:
+  - mkdir build
+  - cd build
+  - cmake ../ -DTINYTEST_TEST=ON
+  - make
+
+script:
+   - cd build
+   - ./tinytest_pass
+   - ./tinytest_fails
+   - ./tinytest_signal
+
+notifications:
+  email: false
+sudo: false
