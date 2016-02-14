@@ -37,7 +37,7 @@ The perform the _actual_ testing the library offers several macros:
   
 	If either array contains one or more NaNs, the check fails. Infs are treated as equal if they are in the same place and of the same sign in both arrays.
   
-	If an assertion fails an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`.
+	If an assertion fails, an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`.
 
 	Note: There is a shorhand macro `ALLCLOSE_DOUBLE_3(a, b, N)` which automatically sets `atol = 1e-08` and `rtol = 1e-05`.  
 
@@ -49,14 +49,14 @@ The perform the _actual_ testing the library offers several macros:
 
 	Checks if two integer arrays `a` and `b` of length `N` are element-wise equal.
 
-	If an assertion fails an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`. 
+	If an assertion fails, an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`. 
 
 * `ALLEQUAL_UNSIGNED(a, b, N)` 
 
 	Same as `ALLEQUAL_INTEGER` but for unsigned integers. 
 
 
-To get access to those macros include `tinytest.h` (Note: this will not include any other header files).  Further library functions of intrest:
+To get access to those macros include `tinytest.h` (this will not include any other header files).  Further library functions of intrest:
 
 * `tinytest_getMainArg(int* argc, char*** argv)` 
 
