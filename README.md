@@ -6,7 +6,7 @@ Tinytest is a header-only, cross-platform, C testing framework. The library is i
 
 ### BUILD
 
-The library consists of a single header file [tinytest.h](https://github.com/thfabian/tinytest/blob/master/tinytest.h). The design intention is that one file serves as a main file and provides all the implementation, while all the other files simply define testcases. 
+The library consists of a single header file [tinytest.h](https://github.com/thfabian/tinytest/blob/master/tinytest.h). The intention behind this design is that one file serves as a main file and provides all the implementation, while all the other files simply define testcases. 
 
 The library should build with every sane C99 conformant compiler on Linux, Mac and Windows. The library was successfully tested with the GNU, Clang, Visual C, PGI and Intel compiler.
 
