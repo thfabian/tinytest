@@ -33,9 +33,7 @@ before_script:
   - make
 
 script:
-   - ./tinytest_pass
-   - ./tinytest_fails
-   - ./tinytest_signal
+   - sh travis.sh
 
 notifications:
   email: false

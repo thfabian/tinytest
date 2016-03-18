@@ -61,9 +61,12 @@ set(TINYTEST_HEADER "${PROJECT_SOURCE_DIR}/tinytest.h")
 
 if(TINYTEST_TEST)
     add_subdirectory(${PROJECT_SOURCE_DIR}/test)
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/travis.sh
+         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
 endif(TINYTEST_TEST)
 
 ################################################################################
 # Installation
 ################################################################################
 install(FILES ${TINYTEST_HEADER} DESTINATION include)
+

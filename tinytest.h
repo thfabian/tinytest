@@ -427,7 +427,7 @@ typedef void(*tinytest_TestCaseType)(void);
 static TINYTEST_NORETURN void tinytest_fatalError(const char* str);
 static void tinytest_init(int argc, char* argv[]);
 static void tinytest_free();
-static void tinytest_run();
+static int tinytest_run();
 static void tinytest_printAssertFailHeader();
 static void tinytest_printBar(FILE* stream, 
                               tinytest_Color_t color, 
@@ -703,7 +703,7 @@ static void tinytest_free()
  * 
  * The final result will be reported to stdout.
  */
-static void tinytest_run()
+static int tinytest_run()
 {
     if(!tinytest_isInitialized)
         tinytest_fatalError("tinytest error: tinytest is not initialized!\n");
@@ -784,6 +784,8 @@ static void tinytest_run()
                 tinytest_testCounter > 1 ? "s" : "");
     }
     fflush(stderr);
+    
+    return tinytest_testErrorCounter ? 1 : 0;
 }
 
 int tinytest_isSame(int value) { return value; }
