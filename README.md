@@ -125,9 +125,9 @@ int main(int argc, char* argv[])
    
     REGISTER_TEST_CASE(MyTest);
     
-    tinytest_run();
+    int ret = tinytest_run();
     tinytest_free();
-    return 0;
+    return ret;
 }
 ```
 
