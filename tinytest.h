@@ -33,7 +33,9 @@ extern "C" {
 #endif
 
 #ifdef __clang__
+#ifndef __INTEL_COMPILER
 #pragma clang system_header
+#endif
 #elif defined __GNUC__
 #pragma GCC system_header
 #endif
