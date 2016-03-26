@@ -27,7 +27,19 @@ The perform the _actual_ testing the library offers several macros:
 * `CHECK(expr)` 
 
 	Check if the expression evaluates to true. If the check fails, an error message will be printed to stderr and the execution _continues_.
+	
+* `CLOSE_DOUBLE(a, b, tol)` 
 
+	Checks if the doubles `a` and `b` equal within a tolerance. The tolerance `tol` is a positive, typically very small double precision number.
+	
+	<img src="https://raw.githubusercontent.com/thfabian/tinytest/master/doc/close.png" alt="Close"/>
+	
+	If an assertion fails, an error message will be printed to stderr and the execution _continues_.
+	
+* `CLOSE_FLOAT(a, b, tol)` 
+
+	Same as `CLOSE_DOUBLE` for single precision floating point numbers. 
+	
 * `ALLCLOSE_DOUBLE(a, b, N, atol, rtol)` 
 
 

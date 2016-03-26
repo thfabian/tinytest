@@ -27,6 +27,7 @@ cmake_minimum_required(VERSION 2.8)
 
 set(TINYTEST_SOURCE
     main.c
+    test-close.c
     test-allclose-double.c
     test-allclose-float.c
     test-allequal-integer.c

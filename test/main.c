@@ -49,6 +49,12 @@ int main(int argc, char* argv[])
     /* main.c */
     REGISTER_TEST_CASE(SameFileTest);
     
+    /* test-close.c */
+    REGISTER_TEST_CASE(CloseDouble);
+    REGISTER_TEST_CASE(CloseFloat);
+    REGISTER_TEST_CASE(CloseDouble_Fails);
+    REGISTER_TEST_CASE(CloseFloat_Fails);
+    
     /* test-allclose-double.c */
     REGISTER_TEST_CASE(AllcloseDouble_Small);
     REGISTER_TEST_CASE(AllcloseDouble_Large);

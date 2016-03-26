@@ -33,7 +33,9 @@ extern "C" {
 #endif
 
 #ifdef __clang__
+#ifndef __INTEL_COMPILER
 #pragma clang system_header
+#endif
 #elif defined __GNUC__
 #pragma GCC system_header
 #endif
@@ -135,6 +137,32 @@ extern "C" {
 #define CHECK(expr) TINYTEST_INTERNAL_CHECK(expr)
 
 /**
+ * @brief Checks if two doubles are equal within a tolerance 
+ *
+ * The tolerance value is a positive, typically very small double precision 
+ * number.
+ *
+ * abs(a - b) <= tol
+ * 
+ * If the assertion fails an error message will be printed to stderr and the 
+ * execution continues.
+ */
+#define CLOSE_DOUBLE(a, b, tol) TINYTEST_INTERNAL_CLOSE(a, b, tol) 
+
+/**
+ * @brief Checks if two floats are equal within a tolerance 
+ *
+ * The tolerance value is a positive, typically very small single precision 
+ * number.
+ *
+ * abs(a - b) <= tol
+ * 
+ * If the assertion fails an error message will be printed to stderr and the 
+ * execution continues.
+ */
+#define CLOSE_FLOAT(a, b, tol) TINYTEST_INTERNAL_CLOSE(a, b, tol) 
+
+/**
  * @brief Checks if two double arrays are element-wise equal within a tolerance 
  *
  * The tolerance values are positive, typically very small double precision 
@@ -213,6 +241,30 @@ extern "C" {
             tinytest_assertFail();                                             \
         tinytest_exprInfo_ptr->exprStr = NULL;                                 \
         tinytest_internal_resetSignal();                                       \
+    } while(tinytest_isSame(0));
+
+/* CLOSE_DOUBLE / CLOSE_FLOAT */
+#define TINYTEST_INTERNAL_CLOSE(a, b, tol)                                     \
+    do                                                                         \
+    {                                                                          \
+        tinytest_internal_initSignal();                                        \
+        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                            \
+        (*tinytest_lineInfo_ptr) = li;                                         \
+        const int sizeOfBuffer = 2 * TINYTEST_TERMINAL_WIDTH;                  \
+        char* exprStr = (char*) malloc(sizeOfBuffer * sizeof(char));           \
+        snprintf(exprStr, sizeOfBuffer, "fabs(%s - %s) <= tol", #a, #b);       \
+        tinytest_exprInfo_ptr->exprStr = exprStr;                              \
+        (*tinytest_assertCounter_ptr)++;                                       \
+        if(TINYTEST_UNLIKELY(fabs(a - b) > tol))                               \
+        {                                                                      \
+            tinytest_assertFail();                                             \
+            fprintf(stderr, "with:\n  %s = %f\n  %s = %f\n\n",                 \
+                    #a, a, #b, b);                                             \
+        }                                                                      \
+        tinytest_exprInfo_ptr->exprStr = NULL;                                 \
+        tinytest_internal_resetSignal();                                       \
+        free(exprStr);                                                         \
+        fflush(stderr);                                                        \
     } while(tinytest_isSame(0));
 
 /* ALLCLOSE_DOUBLE */
@@ -848,6 +900,11 @@ int tinytest_shouldUseColor(int stdout_is_tty)
         return stdout_is_tty;   
 #else
         const char* const term = getenv("TERM");
+        
+        /* It may happen that TERM is undefined, then just cross fingers */
+        if(term == NULL)
+            return stdout_is_tty;
+        
         const int termSupportsColor = (strcmp(term, "xterm") == 0)
               || (strcmp(term, "xterm-color") == 0)
               || (strcmp(term, "xterm-256color") == 0)
@@ -888,8 +945,12 @@ static void tinytest_colorPrintf(FILE* stream,
 #endif
     }
     
-    const int useColor = tinytest_inColorMode && (color != COLOR_DEFAULT);
-
+    int useColor = tinytest_inColorMode && (color != COLOR_DEFAULT);
+  
+#ifdef TINYTEST_NOCOLOR
+    useColor = 0;
+#endif
+    
     if(!useColor)
     {
         vfprintf(stream ,fmt, args);
@@ -1117,3 +1178,5 @@ TINYTEST_ALLEQUAL_IMPL(unsigned, u)
 #endif
 
 #endif /* __TINYTEST_H__ */
+
+
