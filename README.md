@@ -45,11 +45,11 @@ The perform the _actual_ testing the library offers several macros:
 	
 * `CLOSE_DOUBLE(a, b, tol)` and `CLOSE_FLOAT(a, b, tol)` 
 
-	Checks if values `a` and `b` equal within a tolerance. The tolerance `tol` is a positive, typically very small double precision number.
+	Checks if values `a` and `b` are equal within a tolerance. The tolerance `tol` is a positive, typically very small double (single) precision number.
 	
 	<img src="https://raw.githubusercontent.com/thfabian/tinytest/master/doc/close.png" alt="Close"/>
 	
-	If an assertion fails, an error message will be printed to stderr and the execution _continues_.
+	If the check fails, an error message will be printed to stderr and the execution _continues_.
 	
 * `ALLCLOSE_DOUBLE(a, b, N, atol, rtol)` and `ALLCLOSE_FLOAT(a, b, N, atol, rtol)` 
 
