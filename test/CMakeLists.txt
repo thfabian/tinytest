@@ -28,17 +28,21 @@ cmake_minimum_required(VERSION 2.8)
 set(TINYTEST_SOURCE
     main.c
     test-close.c
+    test-check-eq.c
+    test-check-ne.c
+    test-check-gt.c
+    test-check-ge.c
+    test-check-lt.c
+    test-check-le.c
     test-allclose-double.c
     test-allclose-float.c
     test-allequal-integer.c
     test-allequal-unsigned.c
     test-main-arg.c
-    test-segfault.c
 )
 
-add_executable(tinytest_pass ${TINYTEST_SOURCE})
-add_executable(tinytest_fails ${TINYTEST_SOURCE})
-add_executable(tinytest_signal ${TINYTEST_SOURCE})
+add_executable(tinytest_pass ${TINYTEST_SOURCE} ${TINYTEST_HEADER})
+add_executable(tinytest_fails ${TINYTEST_SOURCE} ${TINYTEST_HEADER})
+add_executable(tinytest_signal ${TINYTEST_SOURCE} ${TINYTEST_HEADER})
 
 set_target_properties(tinytest_fails  PROPERTIES COMPILE_FLAGS "-DTEST_FAILS")
-set_target_properties(tinytest_signal PROPERTIES COMPILE_FLAGS "-DTEST_SIGNAL")

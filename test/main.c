@@ -42,7 +42,6 @@ TEST_CASE(SameFileTest)
 int main(int argc, char* argv[])
 {
     tinytest_init(argc, argv);
-    tinytest_initSignal();
     
     srand(42);
     
@@ -54,7 +53,67 @@ int main(int argc, char* argv[])
     REGISTER_TEST_CASE(CloseFloat);
     REGISTER_TEST_CASE(CloseDouble_Fails);
     REGISTER_TEST_CASE(CloseFloat_Fails);
+
+    /* test-check-eq.c */
+    REGISTER_TEST_CASE(CheckEqualDouble);
+    REGISTER_TEST_CASE(CheckEqualDoubleFails);
+    REGISTER_TEST_CASE(CheckEqualFloat);
+    REGISTER_TEST_CASE(CheckEqualFloatFails);
+    REGISTER_TEST_CASE(CheckEqualInteger);
+    REGISTER_TEST_CASE(CheckEqualIntegerFails);
+    REGISTER_TEST_CASE(CheckEqualUnsigned);
+    REGISTER_TEST_CASE(CheckEqualUnsignedFails);
+
+    /* test-check-ne.c */
+    REGISTER_TEST_CASE(CheckNotEqualDouble);
+    REGISTER_TEST_CASE(CheckNotEqualDoubleFails);
+    REGISTER_TEST_CASE(CheckNotEqualFloat);
+    REGISTER_TEST_CASE(CheckNotEqualFloatFails);
+    REGISTER_TEST_CASE(CheckNotEqualInteger);
+    REGISTER_TEST_CASE(CheckNotEqualIntegerFails);
+    REGISTER_TEST_CASE(CheckNotEqualUnsigned);
+    REGISTER_TEST_CASE(CheckNotEqualUnsignedFails);
+
+    /* test-check-gt.c */
+    REGISTER_TEST_CASE(CheckGreaterThanDouble);
+    REGISTER_TEST_CASE(CheckGreaterThanDoubleFails);
+    REGISTER_TEST_CASE(CheckGreaterThanFloat);
+    REGISTER_TEST_CASE(CheckGreaterThanFloatFails);
+    REGISTER_TEST_CASE(CheckGreaterThanInteger);
+    REGISTER_TEST_CASE(CheckGreaterThanIntegerFails);
+    REGISTER_TEST_CASE(CheckGreaterThanUnsigned);
+    REGISTER_TEST_CASE(CheckGreaterThanUnsignedFails);
+
+    /* test-check-ge.c */
+    REGISTER_TEST_CASE(CheckGreaterEqualDouble);
+    REGISTER_TEST_CASE(CheckGreaterEqualDoubleFails);
+    REGISTER_TEST_CASE(CheckGreaterEqualFloat);
+    REGISTER_TEST_CASE(CheckGreaterEqualFloatFails);
+    REGISTER_TEST_CASE(CheckGreaterEqualInteger);
+    REGISTER_TEST_CASE(CheckGreaterEqualIntegerFails);
+    REGISTER_TEST_CASE(CheckGreaterEqualUnsigned);
+    REGISTER_TEST_CASE(CheckGreaterEqualUnsignedFails);
+
+    /* test-check-lt.c */
+    REGISTER_TEST_CASE(CheckLesserThanDouble);
+    REGISTER_TEST_CASE(CheckLesserThanDoubleFails);
+    REGISTER_TEST_CASE(CheckLesserThanFloat);
+    REGISTER_TEST_CASE(CheckLesserThanFloatFails);
+    REGISTER_TEST_CASE(CheckLesserThanInteger);
+    REGISTER_TEST_CASE(CheckLesserThanIntegerFails);
+    REGISTER_TEST_CASE(CheckLesserThanUnsigned);
+    REGISTER_TEST_CASE(CheckLesserThanUnsignedFails);
     
+    /* test-check-le.c */
+    REGISTER_TEST_CASE(CheckLesserEqualDouble);
+    REGISTER_TEST_CASE(CheckLesserEqualDoubleFails);
+    REGISTER_TEST_CASE(CheckLesserEqualFloat);
+    REGISTER_TEST_CASE(CheckLesserEqualFloatFails);
+    REGISTER_TEST_CASE(CheckLesserEqualInteger);
+    REGISTER_TEST_CASE(CheckLesserEqualIntegerFails);
+    REGISTER_TEST_CASE(CheckLesserEqualUnsigned);
+    REGISTER_TEST_CASE(CheckLesserEqualUnsignedFails);
+
     /* test-allclose-double.c */
     REGISTER_TEST_CASE(AllcloseDouble_Small);
     REGISTER_TEST_CASE(AllcloseDouble_Large);
@@ -84,12 +143,7 @@ int main(int argc, char* argv[])
     /* test-main-arg.c */
     REGISTER_TEST_CASE(MainArg_Check);
     REGISTER_TEST_CASE(MainArg_Fails);
-    
-    /* test-segfault.c */
-    REGISTER_TEST_CASE(Segfault_Check);
-    REGISTER_TEST_CASE(Segfault_Allclose);
-    REGISTER_TEST_CASE(Segfault_Allequal);
-  
+
     int ret = tinytest_run();
     tinytest_free();
     

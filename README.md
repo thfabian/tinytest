@@ -1,12 +1,12 @@
-## tinytest - C testing framework (0.0.1) [![Build Status](https://travis-ci.org/thfabian/tinytest.svg?branch=master)](https://travis-ci.org/thfabian/tinytest)
+## tinytest - C testing framework (0.0.2) [![Build Status](https://travis-ci.org/thfabian/tinytest.svg?branch=master)](https://travis-ci.org/thfabian/tinytest)
 
 ### DESCRIPTION
 
-Tinytest is a header-only, cross-platform, C testing framework. The library is inspired by the excellent C++ testing framework [Catch](https://github.com/philsquared/Catch). 
+Tinytest is a header-only, cross-platform, C testing framework. The library is inspired by the excellent C++ testing framework [Catch](https://github.com/philsquared/Catch) as well as Googles testing framework [GTest](https://github.com/google/googletest). 
 
 ### BUILD
 
-The library consists of a single header file [tinytest.h](https://github.com/thfabian/tinytest/blob/master/tinytest.h). The intention behind this design is that one file serves as a main file and provides all the implementation, while all the other files simply define testcases. 
+The library consists of a single header file [tinytest.h](https://github.com/thfabian/tinytest/blob/master/tinytest.h). The intention behind this design is that one file serves as a main file, thus provides all the implementation, while all other files simply define testcases. 
 
 The library should build with every sane C99 conformant compiler on Linux, Mac and Windows. The library was successfully tested with the GNU, Clang, Visual C, PGI and Intel compiler.
 
@@ -20,27 +20,38 @@ The process of defining a testcase is encapsulated in a macro:
 
 * `TEST_CASE(name) { ... }` 
 
-	This defines a testcase called `name` and can be seen as a normal function definition (in fact it defines a function called `void name__TINY_TEST_CASE__(void)`).
+	This defines a testcase called `name` and can be seen as a normal function definition. In fact, it defines a function called `void name__TINY_TEST_CASE__(void)`).
 
 The perform the _actual_ testing the library offers several macros:
 
 * `CHECK(expr)` 
 
-	Check if the expression evaluates to true. If the check fails, an error message will be printed to stderr and the execution _continues_.
-	
-* `CLOSE_DOUBLE(a, b, tol)` 
+	Check if the expression evaluates to true. If the check fails, an error message will be printed to stderr and the execution _continues_. To get better diagnostics, it is advised to use the specialized macros described in the following.
 
-	Checks if the doubles `a` and `b` equal within a tolerance. The tolerance `tol` is a positive, typically very small double precision number.
+* `CHECK_[OP]_[TYPE](a, b)`
+
+	The available specialization for the `CHECK` macro are:
+
+	| **Assertion** | **Types** | **Verifies** |
+|:--------------------|:-------------|
+|`CHECK_EQ_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a == b` |
+|`CHECK_NE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a != b` |
+|`CHECK_GT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a > b` |
+|`CHECK_GE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a >= b` |
+|`CHECK_LT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a < b` |
+|`CHECK_LE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a <= b` |
+
+	An example could be: `CHECK_EQ_DOUBLE(a, b)`. If the check fails, an error message will be printed to stderr and the execution _continues_.
+	
+* `CLOSE_DOUBLE(a, b, tol)` and `CLOSE_FLOAT(a, b, tol)` 
+
+	Checks if values `a` and `b` equal within a tolerance. The tolerance `tol` is a positive, typically very small double precision number.
 	
 	<img src="https://raw.githubusercontent.com/thfabian/tinytest/master/doc/close.png" alt="Close"/>
 	
 	If an assertion fails, an error message will be printed to stderr and the execution _continues_.
 	
-* `CLOSE_FLOAT(a, b, tol)` 
-
-	Same as `CLOSE_DOUBLE` for single precision floating point numbers. 
-	
-* `ALLCLOSE_DOUBLE(a, b, N, atol, rtol)` 
+* `ALLCLOSE_DOUBLE(a, b, N, atol, rtol)` and `ALLCLOSE_FLOAT(a, b, N, atol, rtol)` 
 
 
 	Checks if two double arrays `a` and `b` of length `N` are _element-wise_ equal within a tolerance. The tolerance values are positive, typically very small double precision numbers. The relative difference (rtol * abs(b)) and the absolute difference atol are added together to compare against the absolute difference between `a` and `b`.
@@ -53,19 +64,11 @@ The perform the _actual_ testing the library offers several macros:
 
 	Note: There is a shorhand macro `ALLCLOSE_DOUBLE_3(a, b, N)` which automatically sets `atol = 1e-08` and `rtol = 1e-05`.  
 
-* `ALLCLOSE_FLOAT(a, b, N, atol, rtol)` 
-
-	Same as `ALLCLOSE_DOUBLE` but for single precision floating point numbers. 
-
-* `ALLEQUAL_INTEGER(a, b, N)` 
+* `ALLEQUAL_INTEGER(a, b, N)` and `ALLEQUAL_UNSIGNED(a, b, N)` 
 
 	Checks if two integer arrays `a` and `b` of length `N` are element-wise equal.
 
 	If an assertion fails, an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`. 
-
-* `ALLEQUAL_UNSIGNED(a, b, N)` 
-
-	Same as `ALLEQUAL_INTEGER` but for unsigned integers. 
 
 
 To get access to those macros include `tinytest.h` (this will not include any other header files).  Further library functions of intrest:
@@ -81,12 +84,6 @@ To run our defined testcases, we have to create a main file and define `TINYTEST
 * `tinytest_init(int* argc, char*** argv)` 
 
 	Initialize the library by allocating necessary memory. This _needs_ to be called before any other library call.
-
-* `tinytest_initSignal()` 
-
-	(optional) Setup a signal handler to catch [SIGFPE](https://en.wikipedia.org/wiki/Unix_signal#POSIX_signals), [SIGSEGV](https://en.wikipedia.org/wiki/Unix_signal#POSIX_signals) and [SIGILL](https://en.wikipedia.org/wiki/Unix_signal#POSIX_signals). If a signal is caught during a test, the current test is skipped. Signals are only caught in the check macros `CHECK` and `ALLCLOSE`.
-
-	This option is currently only avaible on POSIX compliant platforms and _experimental_. 
 
 * `REGISTER_TEST_CASE(name)` 
 
