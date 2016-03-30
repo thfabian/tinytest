@@ -343,24 +343,6 @@ extern "C" {
         tinytest_allclose_float(a, b, N, atol, rtol, #a, #b);                                      \
     } while(tinytest_isSame(0));
 
-/* ALLEQUAL_INTEGER */
-#define TINYTEST_INTERNAL_ALLEQUAL_INTEGER(a, b, N)                                                \
-    do                                                                                             \
-    {                                                                                              \
-        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
-        (*tinytest_lineInfo_ptr) = li;                                                             \
-        tinytest_allequal_int(a, b, N, #a, #b);                                                    \
-    } while(tinytest_isSame(0));
-
-/* ALLEQUAL_UNSIGNED */
-#define TINYTEST_INTERNAL_ALLEQUAL_UNSIGNED(a, b, N)                                               \
-    do                                                                                             \
-    {                                                                                              \
-        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
-        (*tinytest_lineInfo_ptr) = li;                                                             \
-        tinytest_allequal_unsigned(a, b, N, #a, #b);                                               \
-    } while(tinytest_isSame(0));
-
 /* ALLCHECK_X_DOUBLE */
 #define TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(CMP, a, b, N)                                          \
     do                                                                                             \
@@ -371,7 +353,7 @@ extern "C" {
                                                                                                    \
         for(int i = 0; i < N; ++i)                                                                 \
         {                                                                                          \
-            if(TINYTEST_UNLIKELY(!(a[i] CMP b[i])))                                                \
+            if(TINYTEST_UNLIKELY(!((a)[i] CMP (b)[i])))                                            \
             {                                                                                      \
                 if((!numError++) || TINYTEST_PRINT_ALL)                                            \
                 {                                                                                  \
@@ -382,10 +364,10 @@ extern "C" {
                         fprintf(stderr, "%s(%i):", li.file, li.line);                              \
                         tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
                     }                                                                              \
-                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "%s[%i] %s %s[%i]\n", #a, i, #CMP,  \
-                                         #b, i);                                                   \
-                    fprintf(stderr, "\nwith:\n %s[%i] = %f\n  %s[%i] = %f\n\n", #a, i, a[i], #b,   \
-                            i, b[i]);                                                              \
+                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] %s %s[%i]\n", #a, i,      \
+                                        #CMP, #b, i);                                              \
+                    fprintf(stderr, "\nwith:\n  %s[%i] = %f\n  %s[%i] = %f\n\n", #a, i, (a)[i], #b,\
+                            i, (b)[i]);                                                            \
                 }                                                                                  \
                 (*tinytest_assertErrorCounter_ptr)++;                                              \
             }                                                                                      \
@@ -407,7 +389,7 @@ extern "C" {
                                                                                                    \
         for(int i = 0; i < N; ++i)                                                                 \
         {                                                                                          \
-            if(TINYTEST_UNLIKELY(!(a[i] CMP b[i])))                                                \
+            if(TINYTEST_UNLIKELY(!((a)[i] CMP (b)[i])))                                            \
             {                                                                                      \
                 if((!numError++) || TINYTEST_PRINT_ALL)                                            \
                 {                                                                                  \
@@ -418,12 +400,12 @@ extern "C" {
                         fprintf(stderr, "%s(%i):", li.file, li.line);                              \
                         tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
                     }                                                                              \
-                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] %s %s[%i]\n", #a, i, #CMP,\
-                                         #b, i);                                                   \
-                    fprintf(stderr, "\nwith:\n  %s[%i] = %i\n  %s[%i] = %i\n\n", #a, i, a[i], #b,  \
-                            i, b[i]);                                                              \
-                }                                                                                  \
+                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] %s %s[%i]\n", #a, i,      \
+                                        #CMP, #b, i);                                              \
+                    fprintf(stderr, "\nwith:\n  %s[%i] = %i\n  %s[%i] = %i\n\n", #a, i, (a)[i], #b,\
+                            i, (b)[i]);                                                            \
                 (*tinytest_assertErrorCounter_ptr)++;                                              \
+                }                                                                                  \
             }                                                                                      \
         }                                                                                          \
         if((numError > 1) && !TINYTEST_PRINT_ALL)                                                  \
@@ -443,7 +425,7 @@ extern "C" {
                                                                                                    \
         for(unsigned i = 0; i < N; ++i)                                                            \
         {                                                                                          \
-            if(TINYTEST_UNLIKELY(!(a[i] CMP b[i])))                                                \
+            if(TINYTEST_UNLIKELY(!((a)[i] CMP (b)[i])))                                            \
             {                                                                                      \
                 if((!numError++) || TINYTEST_PRINT_ALL)                                            \
                 {                                                                                  \
@@ -454,10 +436,10 @@ extern "C" {
                         fprintf(stderr, "%s(%i):", li.file, li.line);                              \
                         tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
                     }                                                                              \
-                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%u] %s %s[%u]\n", #a, i, #CMP,\
-                                         #b, i);                                                   \
-                    fprintf(stderr, "\nwith:\n  %s[%u] = %u\n  %s[%u] = %u\n\n", #a, i, a[i], #b,  \
-                            i, b[i]);                                                              \
+                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] %s %s[%i]\n", #a, i,      \
+                                        #CMP, #b, i);                                              \
+                    fprintf(stderr, "\nwith:\n  %s[%i] = %u\n  %s[%i] = %u\n\n", #a, i, (a)[i], #b,\
+                            i, (b)[i]);                                                            \
                 }                                                                                  \
                 (*tinytest_assertErrorCounter_ptr)++;                                              \
             }                                                                                      \
