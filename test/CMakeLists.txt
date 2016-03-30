@@ -43,6 +43,5 @@ set(TINYTEST_SOURCE
 
 add_executable(tinytest_pass ${TINYTEST_SOURCE} ${TINYTEST_HEADER})
 add_executable(tinytest_fails ${TINYTEST_SOURCE} ${TINYTEST_HEADER})
-add_executable(tinytest_signal ${TINYTEST_SOURCE} ${TINYTEST_HEADER})
 
 set_target_properties(tinytest_fails  PROPERTIES COMPILE_FLAGS "-DTEST_FAILS")
