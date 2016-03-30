@@ -108,3 +108,4 @@ TEST_CASE(CheckGreaterEqualUnsignedFails)
     CHECK_GE_UNSIGNED(arg1, arg2);
 #endif
 }
+

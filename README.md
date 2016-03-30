@@ -32,8 +32,8 @@ The perform the _actual_ testing the library offers several macros:
 
 	The available specialization for the `CHECK` macro are:
 
-	| **Assertion** | **Types** | **Verifies** |
-|:--------------------|:-------------|
+	| *Assertion* | *Types* | *Verifies* |
+|:--------------------|:-------------|:-------------:|
 |`CHECK_EQ_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a == b` |
 |`CHECK_NE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a != b` |
 |`CHECK_GT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a > b` |
