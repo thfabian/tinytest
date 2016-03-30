@@ -247,16 +247,6 @@ extern "C" {
 #define ALLCHECK_LE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<=, a, b, N)
 #define ALLCHECK_LE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<=, a, b, N)
 
-/**
- * @brief Checks if two integer arrays are element-wise equal
- */
-#define ALLEQUAL_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLEQUAL_INTEGER(a, b, N)
-
-/**
- * @brief Checks if two unsigned integer arrays are element-wise equal
- */
-#define ALLEQUAL_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLEQUAL_UNSIGNED(a, b, N)
-
 /* ---------------------------------- Internal macros ------------------------------------------- */
 
 #define TINYTEST_INTERNAL_TEST_CASE(name) void name##__TINY_TEST_CASE__()
