@@ -231,6 +231,14 @@ int main(int argc, char* argv[])
     /* test-main-arg.c */
     REGISTER_TEST_CASE(MainArg_Check);
     REGISTER_TEST_CASE(MainArg_Fails);
+    
+    /* test-custom-msg.c */
+    REGISTER_TEST_CASE(CustomMsgCheck_Fails);
+    REGISTER_TEST_CASE(CustomMsgCheckEqual_Fails);
+    REGISTER_TEST_CASE(CustomMsgClose_Fails);
+    REGISTER_TEST_CASE(CustomMsgAllclose_Fails);
+    REGISTER_TEST_CASE(CustomMsgAllCheckEqualInteger_Fails);
+    REGISTER_TEST_CASE(CustomMsgAllCheckEqualUnsigned_Fails);
 
     int ret = tinytest_run();
     tinytest_free();

@@ -133,136 +133,213 @@ extern "C" {
 /**
  * Check if the expression evaluates to true
  */
-#define CHECK(expr) TINYTEST_INTERNAL_CHECK(expr)
+#define CHECK(expr) TINYTEST_INTERNAL_CHECK(expr, NULL)
+#define CHECK_MSG(expr, msg) TINYTEST_INTERNAL_CHECK(expr, msg)
 
 /**
  * Check if a == b
  */
-#define CHECK_EQ_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(==, a, b)
-#define CHECK_EQ_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(==, a, b)
-#define CHECK_EQ_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(==, a, b)
-#define CHECK_EQ_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(==, a, b)
+#define CHECK_EQ_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(==, a, b, NULL)
+#define CHECK_EQ_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(==, a, b, NULL)
+#define CHECK_EQ_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(==, a, b, NULL)
+#define CHECK_EQ_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(==, a, b, NULL)
+
+#define CHECK_EQ_FLOAT_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(==, a, b, msg)
+#define CHECK_EQ_DOUBLE_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(==, a, b, msg)
+#define CHECK_EQ_INTEGER_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_INTEGER(==, a, b, msg)
+#define CHECK_EQ_UNSIGNED_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(==, a, b, msg)
 
 /**
  * Check if a != b
  */
-#define CHECK_NE_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(!=, a, b)
-#define CHECK_NE_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(!=, a, b)
-#define CHECK_NE_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(!=, a, b)
-#define CHECK_NE_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(!=, a, b)
+#define CHECK_NE_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(!=, a, b, NULL)
+#define CHECK_NE_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(!=, a, b, NULL)
+#define CHECK_NE_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(!=, a, b, NULL)
+#define CHECK_NE_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(!=, a, b, NULL)
+
+#define CHECK_NE_FLOAT_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(!=, a, b, msg)
+#define CHECK_NE_DOUBLE_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(!=, a, b, msg)
+#define CHECK_NE_INTEGER_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_INTEGER(!=, a, b, msg)
+#define CHECK_NE_UNSIGNED_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(!=, a, b, msg)
 
 /**
  * Check if a < b
  */
-#define CHECK_LT_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<, a, b)
-#define CHECK_LT_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<, a, b)
-#define CHECK_LT_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(<, a, b)
-#define CHECK_LT_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(<, a, b)
+#define CHECK_LT_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<, a, b, NULL)
+#define CHECK_LT_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<, a, b, NULL)
+#define CHECK_LT_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(<, a, b, NULL)
+#define CHECK_LT_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(<, a, b, NULL)
+
+#define CHECK_LT_FLOAT_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<, a, b, msg)
+#define CHECK_LT_DOUBLE_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<, a, b, msg)
+#define CHECK_LT_INTEGER_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_INTEGER(<, a, b, msg)
+#define CHECK_LT_UNSIGNED_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(<, a, b, msg)
 
 /**
  * Check if a <= b
  */
-#define CHECK_LE_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<=, a, b)
-#define CHECK_LE_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<=, a, b)
-#define CHECK_LE_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(<=, a, b)
-#define CHECK_LE_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(<=, a, b)
+#define CHECK_LE_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<=, a, b, NULL)
+#define CHECK_LE_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<=, a, b, NULL)
+#define CHECK_LE_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(<=, a, b, NULL)
+#define CHECK_LE_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(<=, a, b, NULL)
+
+#define CHECK_LE_FLOAT_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<=, a, b, msg)
+#define CHECK_LE_DOUBLE_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(<=, a, b, msg)
+#define CHECK_LE_INTEGER_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_INTEGER(<=, a, b, msg)
+#define CHECK_LE_UNSIGNED_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(<=, a, b, msg)
 
 /**
  * Check if a > b
  */
-#define CHECK_GT_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>, a, b)
-#define CHECK_GT_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>, a, b)
-#define CHECK_GT_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(>, a, b)
-#define CHECK_GT_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(>, a, b)
+#define CHECK_GT_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>, a, b, NULL)
+#define CHECK_GT_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>, a, b, NULL)
+#define CHECK_GT_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(>, a, b, NULL)
+#define CHECK_GT_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(>, a, b, NULL)
+
+#define CHECK_GT_FLOAT_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>, a, b, msg)
+#define CHECK_GT_DOUBLE_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>, a, b, msg)
+#define CHECK_GT_INTEGER_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_INTEGER(>, a, b, msg)
+#define CHECK_GT_UNSIGNED_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(>, a, b, msg)
 
 /**
  * Check if a >= b
  */
-#define CHECK_GE_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>=, a, b)
-#define CHECK_GE_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>=, a, b)
-#define CHECK_GE_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(>=, a, b)
-#define CHECK_GE_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(>=, a, b)
+#define CHECK_GE_FLOAT(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>=, a, b, NULL)
+#define CHECK_GE_DOUBLE(a, b) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>=, a, b, NULL)
+#define CHECK_GE_INTEGER(a, b) TINYTEST_INTERNAL_CHECK_X_INTEGER(>=, a, b, NULL)
+#define CHECK_GE_UNSIGNED(a, b) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(>=, a, b, NULL)
+
+#define CHECK_GE_FLOAT_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>=, a, b, msg)
+#define CHECK_GE_DOUBLE_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_DOUBLE(>=, a, b, msg)
+#define CHECK_GE_INTEGER_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_INTEGER(>=, a, b, msg)
+#define CHECK_GE_UNSIGNED_MSG(a, b, msg) TINYTEST_INTERNAL_CHECK_X_UNSIGNED(>=, a, b, msg)
 
 /**
  * Checks if two doubles are equal within a tolerance
  */
-#define CLOSE_DOUBLE(a, b, tol) TINYTEST_INTERNAL_CLOSE(a, b, tol)
-#define CLOSE_FLOAT(a, b, tol) TINYTEST_INTERNAL_CLOSE(a, b, tol)
+#define CLOSE_DOUBLE(a, b, tol) TINYTEST_INTERNAL_CLOSE(a, b, tol, NULL)
+#define CLOSE_FLOAT(a, b, tol) TINYTEST_INTERNAL_CLOSE(a, b, tol, NULL)
+
+#define CLOSE_DOUBLE_MSG(a, b, tol, msg) TINYTEST_INTERNAL_CLOSE(a, b, tol, msg)
+#define CLOSE_FLOAT_MSG(a, b, tol, msg) TINYTEST_INTERNAL_CLOSE(a, b, tol, msg)
 
 /**
  * Checks if two double arrays are element-wise equal within a tolerance
  */
-#define ALLCLOSE_DOUBLE(a, b, N, atol, rtol) TINYTEST_INTERNAL_ALLCLOSE_DOUBLE(a, b, N, atol, rtol)
-#define ALLCLOSE_DOUBLE_3(a, b, N) TINYTEST_INTERNAL_ALLCLOSE_DOUBLE(a, b, N, 1e-08, 1e-05)
+#define ALLCLOSE_DOUBLE(a, b, N, atol, rtol)                                                       \
+    TINYTEST_INTERNAL_ALLCLOSE_X(double , a, b, N, atol, rtol, NULL)
+#define ALLCLOSE_DOUBLE_3(a, b, N) TINYTEST_INTERNAL_ALLCLOSE_X(double, a, b, N, 1e-08, 1e-05, NULL)
+
+#define ALLCLOSE_DOUBLE_MSG(a, b, N, atol, rtol, msg)                                              \
+    TINYTEST_INTERNAL_ALLCLOSE_X(double , a, b, N, atol, rtol, msg)
+#define ALLCLOSE_DOUBLE_3_MSG(a, b, N)                                                             \
+    TINYTEST_INTERNAL_ALLCLOSE_X(double, a, b, N, 1e-08, 1e-05, msg)
 
 /**
  * Checks if two float arrays are element-wise equal within a tolerance
  */
-#define ALLCLOSE_FLOAT(a, b, N, atol, rtol) TINYTEST_INTERNAL_ALLCLOSE_FLOAT(a, b, N, atol, rtol)
-#define ALLCLOSE_FLOAT_3(a, b, N) TINYTEST_INTERNAL_ALLCLOSE_FLOAT(a, b, N, 1e-08f, 1e-05f)
+#define ALLCLOSE_FLOAT(a, b, N, atol, rtol)                                                        \
+    TINYTEST_INTERNAL_ALLCLOSE_X(float, a, b, N, atol, rtol, NULL)
+#define ALLCLOSE_FLOAT_3(a, b, N) TINYTEST_INTERNAL_ALLCLOSE_X(float, a, b, N, 1e-08, 1e-05, NULL)
+
+#define ALLCLOSE_FLOAT_MSG(a, b, N, atol, rtol, msg)                                               \
+    TINYTEST_INTERNAL_ALLCLOSE_X(float , a, b, N, atol, rtol, msg)
+#define ALLCLOSE_FLOAT_3_MSG(a, b, N)                                                              \
+    TINYTEST_INTERNAL_ALLCLOSE_X(float, a, b, N, 1e-08, 1e-05, msg)
 
 /**
  * Check for every element: a[i] == b[i]
  */
-#define ALLCHECK_EQ_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(==, a, b, N)
-#define ALLCHECK_EQ_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(==, a, b, N)
+#define ALLCHECK_EQ_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(==, a, b, N, NULL)
+#define ALLCHECK_EQ_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(==, a, b, N, NULL)
+
+#define ALLCHECK_EQ_INTEGER_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(==, a, b, N, msg)
+#define ALLCHECK_EQ_UNSIGNED_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(==, a, b, N,msg)
 
 /**
  * Check for every element: a[i] != b[i]
  */
-#define ALLCHECK_NE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(!=, a, b, N)
-#define ALLCHECK_NE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(!=, a, b, N)
-#define ALLCHECK_NE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(!=, a, b, N)
-#define ALLCHECK_NE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(!=, a, b, N)
+#define ALLCHECK_NE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(!=, a, b, N, NULL)
+#define ALLCHECK_NE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(!=, a, b, N, NULL)
+#define ALLCHECK_NE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(!=, a, b, N, NULL)
+#define ALLCHECK_NE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(!=, a, b, N, NULL)
+
+#define ALLCHECK_NE_FLOAT_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(!=, a, b, N, msg)
+#define ALLCHECK_NE_DOUBLE_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(!=, a, b, N, msg)
+#define ALLCHECK_NE_INTEGER_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(!=, a, b, N, msg)
+#define ALLCHECK_NE_UNSIGNED_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(!=, a, b, N, msg)
 
 /**
  * Check for every element: a[i] > b[i]
  */
-#define ALLCHECK_GT_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>, a, b, N)
-#define ALLCHECK_GT_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>, a, b, N)
-#define ALLCHECK_GT_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(>, a, b, N)
-#define ALLCHECK_GT_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(>, a, b, N)
+#define ALLCHECK_GT_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>, a, b, N, NULL)
+#define ALLCHECK_GT_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>, a, b, N, NULL)
+#define ALLCHECK_GT_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(>, a, b, N, NULL)
+#define ALLCHECK_GT_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(>, a, b, N, NULL)
+
+#define ALLCHECK_GT_FLOAT_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>, a, b, N, msg)
+#define ALLCHECK_GT_DOUBLE_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>, a, b, N, msg)
+#define ALLCHECK_GT_INTEGER_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(>, a, b, N, msg)
+#define ALLCHECK_GT_UNSIGNED_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(>, a, b, N, msg)
 
 /**
  * Check for every element: a[i] >= b[i]
  */
-#define ALLCHECK_GE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>=, a, b, N)
-#define ALLCHECK_GE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>=, a, b, N)
-#define ALLCHECK_GE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(>=, a, b, N)
-#define ALLCHECK_GE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(>=, a, b, N)
+#define ALLCHECK_GE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>=, a, b, N, NULL)
+#define ALLCHECK_GE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>=, a, b, N, NULL)
+#define ALLCHECK_GE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(>=, a, b, N, NULL)
+#define ALLCHECK_GE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(>=, a, b, N, NULL)
+
+#define ALLCHECK_GE_FLOAT_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>=, a, b, N, msg)
+#define ALLCHECK_GE_DOUBLE_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>=, a, b, N, msg)
+#define ALLCHECK_GE_INTEGER_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(>=, a, b, N, msg)
+#define ALLCHECK_GE_UNSIGNED_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(>=, a, b, N, msg)
 
 /**
  * Check for every element: a[i] < b[i]
  */
-#define ALLCHECK_LT_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<, a, b, N)
-#define ALLCHECK_LT_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<, a, b, N)
-#define ALLCHECK_LT_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<, a, b, N)
-#define ALLCHECK_LT_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<, a, b, N)
+#define ALLCHECK_LT_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<, a, b, N, NULL)
+#define ALLCHECK_LT_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<, a, b, N, NULL)
+#define ALLCHECK_LT_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<, a, b, N, NULL)
+#define ALLCHECK_LT_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<, a, b, N, NULL)
+
+#define ALLCHECK_LT_FLOAT_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<, a, b, N, msg)
+#define ALLCHECK_LT_DOUBLE_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<, a, b, N, msg)
+#define ALLCHECK_LT_INTEGER_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<, a, b, N, msg)
+#define ALLCHECK_LT_UNSIGNED_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<, a, b, N, msg)
 
 /**
  * Check for every element: a[i] <= b[i]
  */
-#define ALLCHECK_LE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<=, a, b, N)
-#define ALLCHECK_LE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<=, a, b, N)
-#define ALLCHECK_LE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<=, a, b, N)
-#define ALLCHECK_LE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<=, a, b, N)
+#define ALLCHECK_LE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<=, a, b, N, NULL)
+#define ALLCHECK_LE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<=, a, b, N, NULL)
+#define ALLCHECK_LE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<=, a, b, N, NULL)
+#define ALLCHECK_LE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<=, a, b, N, NULL)
+
+#define ALLCHECK_LE_FLOAT_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<=, a, b, N, msg)
+#define ALLCHECK_LE_DOUBLE_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<=, a, b, N, msg)
+#define ALLCHECK_LE_INTEGER_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<=, a, b, N, msg)
+#define ALLCHECK_LE_UNSIGNED_MSG(a, b, N, msg) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<=, a, b, N, msg)
 
 /* ---------------------------------- Internal macros ------------------------------------------- */
 
 #define TINYTEST_INTERNAL_TEST_CASE(name) void name##__TINY_TEST_CASE__()
 
 /* CHECK */
-#define TINYTEST_INTERNAL_CHECK(expr)                                                              \
+#define TINYTEST_INTERNAL_CHECK(expr, msg)                                                         \
     do                                                                                             \
     {                                                                                              \
         tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
         (*tinytest_lineInfo_ptr) = li;                                                             \
         (*tinytest_assertCounter_ptr)++;                                                           \
         if(TINYTEST_UNLIKELY((expr) == 0))                                                         \
+        {                                                                                          \
             tinytest_assertFail(#expr);                                                            \
+            if(msg) fprintf(stderr, "\t%s\n\n", msg);                                              \
+        }                                                                                          \
     } while(tinytest_isSame(0));
 
-#define TINYTEST_INTERNAL_CHECK_X_DOUBLE(CMP, a, b)                                                \
+#define TINYTEST_INTERNAL_CHECK_X_DOUBLE(CMP, a, b, msg)                                           \
     do                                                                                             \
     {                                                                                              \
         tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
@@ -271,11 +348,12 @@ extern "C" {
         if(TINYTEST_UNLIKELY(!((a) CMP(b))))                                                       \
         {                                                                                          \
             tinytest_assertFail("%s %s %s", #a, #CMP, #b);                                         \
+            if(msg) fprintf(stderr, "%s\n\n", msg);                                                \
             fprintf(stderr, "with:\n  %s = %f\n  %s = %f\n\n", #a, a, #b, b);                      \
         }                                                                                          \
     } while(tinytest_isSame(0));
 
-#define TINYTEST_INTERNAL_CHECK_X_INTEGER(CMP, a, b)                                               \
+#define TINYTEST_INTERNAL_CHECK_X_INTEGER(CMP, a, b, msg)                                          \
     do                                                                                             \
     {                                                                                              \
         tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
@@ -284,11 +362,12 @@ extern "C" {
         if(TINYTEST_UNLIKELY(!((a) CMP(b))))                                                       \
         {                                                                                          \
             tinytest_assertFail("%s %s %s", #a, #CMP, #b);                                         \
+            if(msg) fprintf(stderr, "%s\n\n", msg);                                                \
             fprintf(stderr, "with:\n  %s = %i\n  %s = %i\n\n", #a, a, #b, b);                      \
         }                                                                                          \
     } while(tinytest_isSame(0));
 
-#define TINYTEST_INTERNAL_CHECK_X_UNSIGNED(CMP, a, b)                                              \
+#define TINYTEST_INTERNAL_CHECK_X_UNSIGNED(CMP, a, b, msg)                                         \
     do                                                                                             \
     {                                                                                              \
         tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
@@ -297,12 +376,13 @@ extern "C" {
         if(TINYTEST_UNLIKELY(!((a) CMP(b))))                                                       \
         {                                                                                          \
             tinytest_assertFail("%s %s %s", #a, #CMP, #b);                                         \
+            if(msg) fprintf(stderr, "%s\n\n", msg);                                                \
             fprintf(stderr, "with:\n  %s = %u\n  %s = %u\n\n", #a, a, #b, b);                      \
         }                                                                                          \
     } while(tinytest_isSame(0));
 
 /* CLOSE_DOUBLE / CLOSE_FLOAT */
-#define TINYTEST_INTERNAL_CLOSE(a, b, tol)                                                         \
+#define TINYTEST_INTERNAL_CLOSE(a, b, tol, msg)                                                    \
     do                                                                                             \
     {                                                                                              \
         tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
@@ -311,30 +391,13 @@ extern "C" {
         if(TINYTEST_UNLIKELY(fabs(a - b) > tol))                                                   \
         {                                                                                          \
             tinytest_assertFail("fabs(%s - %s) <= tol", #a, #b);                                   \
+            if(msg) fprintf(stderr, "%s\n\n", msg);                                                \
             fprintf(stderr, "with:\n  %s = %f\n  %s = %f\n\n", #a, a, #b, b);                      \
         }                                                                                          \
     } while(tinytest_isSame(0));
 
-/* ALLCLOSE_DOUBLE */
-#define TINYTEST_INTERNAL_ALLCLOSE_DOUBLE(a, b, N, atol, rtol)                                     \
-    do                                                                                             \
-    {                                                                                              \
-        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
-        (*tinytest_lineInfo_ptr) = li;                                                             \
-        tinytest_allclose_double(a, b, N, atol, rtol, #a, #b);                                     \
-    } while(tinytest_isSame(0));
-
-/* ALLCLOSE_FLOAT */
-#define TINYTEST_INTERNAL_ALLCLOSE_FLOAT(a, b, N, atol, rtol)                                      \
-    do                                                                                             \
-    {                                                                                              \
-        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
-        (*tinytest_lineInfo_ptr) = li;                                                             \
-        tinytest_allclose_float(a, b, N, atol, rtol, #a, #b);                                      \
-    } while(tinytest_isSame(0));
-
 /* ALLCHECK_X_DOUBLE */
-#define TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(CMP, a, b, N)                                          \
+#define TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(CMP, a, b, N, msg)                                     \
     do                                                                                             \
     {                                                                                              \
         tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
@@ -356,6 +419,7 @@ extern "C" {
                     }                                                                              \
                     tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] %s %s[%i]\n", #a, i,      \
                                         #CMP, #b, i);                                              \
+                    if(msg) fprintf(stderr, "\n%s\n", msg);                                        \
                     fprintf(stderr, "\nwith:\n  %s[%i] = %f\n  %s[%i] = %f\n\n", #a, i, (a)[i], #b,\
                             i, (b)[i]);                                                            \
                 }                                                                                  \
@@ -370,7 +434,7 @@ extern "C" {
     } while(tinytest_isSame(0));
 
 /* ALLCHECK_X_INTEGER */
-#define TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(CMP, a, b, N)                                         \
+#define TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(CMP, a, b, N, msg)                                    \
     do                                                                                             \
     {                                                                                              \
         tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
@@ -392,6 +456,7 @@ extern "C" {
                     }                                                                              \
                     tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] %s %s[%i]\n", #a, i,      \
                                         #CMP, #b, i);                                              \
+                    if(msg) fprintf(stderr, "\n%s\n", msg);                                        \
                     fprintf(stderr, "\nwith:\n  %s[%i] = %i\n  %s[%i] = %i\n\n", #a, i, (a)[i], #b,\
                             i, (b)[i]);                                                            \
                 (*tinytest_assertErrorCounter_ptr)++;                                              \
@@ -405,8 +470,8 @@ extern "C" {
         fflush(stderr);                                                                            \
     } while(tinytest_isSame(0));
 
-/* ALLCHECK_X_INTEGER */
-#define TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(CMP, a, b, N)                                        \
+/* ALLCHECK_X_UNSIGNED */
+#define TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(CMP, a, b, N, msg)                                   \
     do                                                                                             \
     {                                                                                              \
         tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
@@ -428,8 +493,82 @@ extern "C" {
                     }                                                                              \
                     tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] %s %s[%i]\n", #a, i,      \
                                         #CMP, #b, i);                                              \
+                    if(msg) fprintf(stderr, "\n%s\n", msg);                                        \
                     fprintf(stderr, "\nwith:\n  %s[%i] = %u\n  %s[%i] = %u\n\n", #a, i, (a)[i], #b,\
                             i, (b)[i]);                                                            \
+                }                                                                                  \
+                (*tinytest_assertErrorCounter_ptr)++;                                              \
+            }                                                                                      \
+        }                                                                                          \
+        if((numError > 1) && !TINYTEST_PRINT_ALL)                                                  \
+            fprintf(stderr, " ... failed also at %i other positon%s ... \n\n", numError - 1,       \
+                    numError == 2 ? "" : "s");                                                     \
+        (*tinytest_assertCounter_ptr) += N;                                                        \
+        fflush(stderr);                                                                            \
+    } while(tinytest_isSame(0));
+    
+
+/* ALLCLOSE_FLOAT and ALLCLOSE_DOUBLE */
+#define TINYTEST_INTERNAL_ALLCLOSE_X(type, a, b, N, atol, rtol, msg)                               \
+    do                                                                                             \
+    {                                                                                              \
+        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
+        (*tinytest_lineInfo_ptr) = li;                                                             \
+        int numError = 0;                                                                          \
+        int printedHeader = 0;                                                                     \
+                                                                                                   \
+        int errorUnequal = 0;                                                                      \
+        int errorHasNaN = 0;                                                                       \
+        int errorHasInf = 0;                                                                       \
+        int aIsNaN = 0;                                                                            \
+        int bIsNaN = 0;                                                                            \
+        int aIsInf = 0;                                                                            \
+        int bIsInf = 0;                                                                            \
+                                                                                                   \
+        for(int i = 0; i < N; ++i)                                                                 \
+        {                                                                                          \
+            errorUnequal = (fabs(a[i] - b[i]) > (atol + rtol * fabs(b[i])));                       \
+            errorHasNaN = ((aIsNaN = isnan(a[i])) || (bIsNaN = isnan(b[i])));                      \
+            errorHasInf = ((aIsInf = isinf(a[i])) != (bIsInf = isinf(b[i])));                      \
+            if(errorUnequal || errorHasNaN || errorHasInf)                                         \
+            {                                                                                      \
+                if((!numError++) || TINYTEST_PRINT_ALL)                                            \
+                {                                                                                  \
+                    if(!printedHeader)                                                             \
+                    {                                                                              \
+                        printedHeader = 1;                                                         \
+                        tinytest_printAssertFailHeader();                                          \
+                        fprintf(stderr, "%s(%i):", li.file, li.line);                              \
+                        tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
+                    }                                                                              \
+                                                                                                   \
+                    if(errorHasNaN || errorHasInf)                                                 \
+                    {                                                                              \
+                        tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] != %s[%i]\n", #a,     \
+                                             i, #b, i);                                            \
+                        if(msg) fprintf(stderr, "%s\n\n", msg);                                    \
+                        fputs("\nwith:\n", stderr);                                                \
+                        if(aIsInf || aIsNaN)                                                       \
+                            fprintf(stderr, "\t%s[%i] = %s\n", #a, i, aIsInf ? "inf" : "nan");     \
+                        else                                                                       \
+                            fprintf(stderr, "\t%s[%i] = %f\n\n", #a, i, a[i]);                     \
+                                                                                                   \
+                        if(bIsInf || bIsNaN)                                                       \
+                            fprintf(stderr, "\t%s[%i] = %s\n\n", #b, i, bIsInf ? "inf" : "nan");   \
+                        else                                                                       \
+                            fprintf(stderr, "\t%s[%i] = %f\n\n", #b, i, b[i]);                     \
+                    }                                                                              \
+                    else                                                                           \
+                    {                                                                              \
+                        tinytest_colorPrintf(stderr, COLOR_YELLOW,                                 \
+                                             "\tfabs(%s[%i] - %s[%i]) <= (atol + rtol "            \
+                                             "* fabs(%s[%i]))\n",                                  \
+                                             #a, i, #b, i, #b, i);                                 \
+                        if(msg) fprintf(stderr, "\n%s\n", msg);                                    \
+                        fprintf(stderr, "\nwith:\n  atol = %3.1e\n  rtol = "                       \
+                                        "%3.1e\n  %s[%i] = %f\n  %s[%i] = %f\n\n",                 \
+                                atol, rtol, #a, i, a[i], #b, i, b[i]);                             \
+                    }                                                                              \
                 }                                                                                  \
                 (*tinytest_assertErrorCounter_ptr)++;                                              \
             }                                                                                      \
@@ -447,7 +586,9 @@ extern "C" {
  * DECLARATION
 \**************************************************************************************************/
 
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
  * @brief Number of assertions
@@ -495,31 +636,6 @@ extern int tinytest_isSame(int value);
 extern void tinytest_assertFail(const char* exprStr, ...);
 
 /**
- * @brief See ALLCLOSE_DOUBLE
- *
- * Relies on global variable: tinytest_lineInfo_ptr
- */
-extern void tinytest_allclose_double(const double* a,
-                                     const double* b,
-                                     const int N,
-                                     const double atol,
-                                     const double rtol,
-                                     const char* aStr,
-                                     const char* bStr);
-/**
- * @brief See ALLCLOSE_FLOAT
- *
- * Relies on global variable: tinytest_lineInfo_ptr
- */
-extern void tinytest_allclose_float(const float* a,
-                                    const float* b,
-                                    const int N,
-                                    const float atol,
-                                    const float rtol,
-                                    const char* aStr,
-                                    const char* bStr);
-
-/**
  * Colors
  */
 typedef enum tinytest_Color
@@ -546,10 +662,7 @@ extern void tinytest_printAssertFailHeader();
 
 #ifdef TINYTEST_MAIN
 
-#include <math.h>
 #include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #ifdef TINYTEST_COMPILER_MSVC
@@ -1017,79 +1130,6 @@ void tinytest_assertFail(const char* exprStr, ...)
     fflush(stderr);
     va_end(args);
 }
-
-
-#define TINYTEST_ALLCLOSE_IMPL(type)                                                               \
-void tinytest_allclose_##type(const type* a, const type* b, const int N, const type atol,          \
-                              const type rtol, const char* aStr, const char* bStr)                 \
-{                                                                                                  \
-        tinytest_LineInfo_t li = *tinytest_lineInfo_ptr;                                           \
-        int numError = 0;                                                                          \
-        int printedHeader = 0;                                                                     \
-                                                                                                   \
-        int errorUnequal = 0;                                                                      \
-        int errorHasNaN = 0;                                                                       \
-        int errorHasInf = 0;                                                                       \
-        int aIsNaN = 0;                                                                            \
-        int bIsNaN = 0;                                                                            \
-        int aIsInf = 0;                                                                            \
-        int bIsInf = 0;                                                                            \
-                                                                                                   \
-        for(int i = 0; i < N; ++i)                                                                 \
-        {                                                                                          \
-            errorUnequal = (fabs(a[i] - b[i]) > (atol + rtol * fabs(b[i])));                       \
-            errorHasNaN = ((aIsNaN = isnan(a[i])) || (bIsNaN = isnan(b[i])));                      \
-            errorHasInf = ((aIsInf = isinf(a[i])) != (bIsInf = isinf(b[i])));                      \
-            if(errorUnequal || errorHasNaN || errorHasInf)                                         \
-            {                                                                                      \
-                if((!numError++) || TINYTEST_PRINT_ALL)                                            \
-                {                                                                                  \
-                    if(!printedHeader)                                                             \
-                    {                                                                              \
-                        printedHeader = 1;                                                         \
-                        tinytest_printAssertFailHeader();                                          \
-                        fprintf(stderr, "%s(%i):", li.file, li.line);                              \
-                        tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
-                    }                                                                              \
-                                                                                                   \
-                    if(errorHasNaN || errorHasInf)                                                 \
-                    {                                                                              \
-                        tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] != %s[%i]\n", aStr,   \
-                                             i, bStr, i);                                          \
-                        fputs("\nwith:\n", stderr);                                                \
-                        if(aIsInf || aIsNaN)                                                       \
-                            fprintf(stderr, "\t%s[%i] = %s\n", aStr, i, aIsInf ? "inf" : "nan");   \
-                        else                                                                       \
-                            fprintf(stderr, "\t%s[%i] = %f\n\n", aStr, i, a[i]);                   \
-                                                                                                   \
-                        if(bIsInf || bIsNaN)                                                       \
-                            fprintf(stderr, "\t%s[%i] = %s\n\n", bStr, i, bIsInf ? "inf" : "nan"); \
-                        else                                                                       \
-                            fprintf(stderr, "\t%s[%i] = %f\n\n", bStr, i, b[i]);                   \
-                    }                                                                              \
-                    else                                                                           \
-                    {                                                                              \
-                        tinytest_colorPrintf(stderr, COLOR_YELLOW,                                 \
-                                             "\tfabs(%s[%i] - %s[%i]) <= (atol + rtol "            \
-                                             "* fabs(%s[%i]))\n",                                  \
-                                             aStr, i, bStr, i, bStr, i);                           \
-                        fprintf(stderr, "\nwith:\n  atol = %3.1e\n  rtol = "                       \
-                                        "%3.1e\n  %s[%i] = %f\n  %s[%i] = %f\n\n",                 \
-                                atol, rtol, aStr, i, a[i], bStr, i, b[i]);                         \
-                    }                                                                              \
-                }                                                                                  \
-                (*tinytest_assertErrorCounter_ptr)++;                                              \
-            }                                                                                      \
-        }                                                                                          \
-        if((numError > 1) && !TINYTEST_PRINT_ALL)                                                  \
-            fprintf(stderr, " ... failed also at %i other positon%s ... \n\n", numError - 1,       \
-                    numError == 2 ? "" : "s");                                                     \
-        (*tinytest_assertCounter_ptr) += N;                                                        \
-        fflush(stderr);                                                                            \
-}
-
-TINYTEST_ALLCLOSE_IMPL(double)
-TINYTEST_ALLCLOSE_IMPL(float)
 
 #endif /* TINYTEST_MAIN */
 

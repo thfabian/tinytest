@@ -24,9 +24,10 @@ The process of defining a testcase is encapsulated in a macro:
 
 The perform the _actual_ testing the library offers several macros:
 
-* `CHECK(expr)` 
 
-	Check if the expression evaluates to true. If the check fails, an error message will be printed to stderr and the execution _continues_. To get better diagnostics, it is advised to use the specialized macros described in the following.
+* `CHECK(expr)` and `CHECK_MSG(expr, msg)` 
+
+	Check if the expression evaluates to true. If the check fails, an error message will be printed to stderr and the execution _continues_. Optionally one can pass an error message which will be printed in case the assertions fails. To get better diagnostics, it is advised to use the specialized macros described in the following.
 
 * `CHECK_[OP]_[TYPE](a, b)`
 
@@ -41,7 +42,8 @@ The perform the _actual_ testing the library offers several macros:
 |`CHECK_LT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a < b` |
 |`CHECK_LE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a <= b` |
 
-	Note: to compare real numbers within a tolerance, use `CLOSE_DOUBLE(a, b)`. If the check fails, an error message will be printed to stderr and the execution _continues_.
+    All those macros are also available with the `_MSG` suffix to pass a custom error message.
+	Note: to compare real numbers within a tolerance, use `CLOSE_DOUBLE(a, b)`. 
 	
 * `CLOSE_DOUBLE(a, b, tol)` and `CLOSE_FLOAT(a, b, tol)` 
 
@@ -65,7 +67,8 @@ The perform the _actual_ testing the library offers several macros:
 |`ALLCHECK_LE_[TYPE](a, b, N);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] <= b[i]` |
 
 	Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`. 
-	
+    All those macros are also available with the `_MSG` suffix to pass a custom error message.
+	    
 * `ALLCLOSE_DOUBLE(a, b, N, atol, rtol)` and `ALLCLOSE_FLOAT(a, b, N, atol, rtol)` 
 
 
@@ -76,11 +79,12 @@ The perform the _actual_ testing the library offers several macros:
 	If either array contains one or more NaNs, the check fails. Infs are treated as equal if they are in the same place and of the same sign in both arrays.
   
 	If an assertion fails, an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`.
+    There is a version with the `_MSG` suffix to pass a custom error message.
 
 	Note: There is a shorhand macro `ALLCLOSE_DOUBLE_3(a, b, N)` which automatically sets `atol = 1e-08` and `rtol = 1e-05`. 
 
 
-To get access to those macros include `tinytest.h` (this will in addition include `<stdio.h>`).  Further library functions of intrest:
+To get access to those macros include `tinytest.h` (this will in addition include `<stdio.h>`, `<mat.h>` and `<stdlib.h>`).  Further library functions of intrest:
 
 * `tinytest_getMainArg(int* argc, char*** argv)` 
 

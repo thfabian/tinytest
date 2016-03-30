@@ -43,6 +43,7 @@ set(TINYTEST_SOURCE
     test-allclose-double.c
     test-allclose-float.c
     test-main-arg.c
+    test-custom-msg.c
 )
 
 add_executable(tinytest_pass ${TINYTEST_SOURCE} ${TINYTEST_HEADER})
