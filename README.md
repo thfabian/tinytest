@@ -1,4 +1,4 @@
-## tinytest - C testing framework (0.0.2) [![Build Status](https://travis-ci.org/thfabian/tinytest.svg?branch=master)](https://travis-ci.org/thfabian/tinytest)
+## tinytest - C testing framework (0.0.1) [![Build Status](https://travis-ci.org/thfabian/tinytest.svg?branch=master)](https://travis-ci.org/thfabian/tinytest)
 
 ### DESCRIPTION
 
@@ -41,15 +41,30 @@ The perform the _actual_ testing the library offers several macros:
 |`CHECK_LT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a < b` |
 |`CHECK_LE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a <= b` |
 
-	An example could be: `CHECK_EQ_DOUBLE(a, b)`. If the check fails, an error message will be printed to stderr and the execution _continues_.
+	Note: to compare real numbers within a tolerance, use `CLOSE_DOUBLE(a, b)`. If the check fails, an error message will be printed to stderr and the execution _continues_.
 	
 * `CLOSE_DOUBLE(a, b, tol)` and `CLOSE_FLOAT(a, b, tol)` 
 
-	Checks if values `a` and `b` are equal within a tolerance. The tolerance `tol` is a positive, typically very small double (single) precision number.
+	Checks if values `a` and `b` equal within a tolerance. The tolerance `tol` is a positive, typically very small double precision number.
 	
 	<img src="https://raw.githubusercontent.com/thfabian/tinytest/master/doc/close.png" alt="Close"/>
 	
-	If the check fails, an error message will be printed to stderr and the execution _continues_.
+	If an assertion fails, an error message will be printed to stderr and the execution _continues_.
+
+* `ALLCHECK_[OP]_[TYPE](a, b, N)` 
+
+	The following macros operator elementwise on the array `a` and `b` of length `N`:
+
+	| *Assertion* | *Types* | *Verifies* |
+|:--------------------|:-------------|:-------------:|
+|`ALLCHECK_EQ_[TYPE](a, b);`| `INTEGER, UNSIGNED` | `a[i] == b[i]` |
+|`ALLCHECK_NE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] != b[i]` |
+|`ALLCHECK_GT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] > b[i]` |
+|`ALLCHECK_GE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] >= b[i]` |
+|`ALLCHECK_LT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] < b[i]` |
+|`ALLCHECK_LE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] <= b[i]` |
+
+	If an assertion fails, an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`. 
 	
 * `ALLCLOSE_DOUBLE(a, b, N, atol, rtol)` and `ALLCLOSE_FLOAT(a, b, N, atol, rtol)` 
 
@@ -64,14 +79,8 @@ The perform the _actual_ testing the library offers several macros:
 
 	Note: There is a shorhand macro `ALLCLOSE_DOUBLE_3(a, b, N)` which automatically sets `atol = 1e-08` and `rtol = 1e-05`.  
 
-* `ALLEQUAL_INTEGER(a, b, N)` and `ALLEQUAL_UNSIGNED(a, b, N)` 
 
-	Checks if two integer arrays `a` and `b` of length `N` are element-wise equal.
-
-	If an assertion fails, an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`. 
-
-
-To get access to those macros include `tinytest.h` (this will not include any other header files).  Further library functions of intrest:
+To get access to those macros include `tinytest.h` (this will in addition include `<stdio.h>`).  Further library functions of intrest:
 
 * `tinytest_getMainArg(int* argc, char*** argv)` 
 
