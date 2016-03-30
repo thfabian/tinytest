@@ -77,7 +77,7 @@ The perform the _actual_ testing the library offers several macros:
   
 	If an assertion fails, an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`.
 
-	Note: There is a shorhand macro `ALLCLOSE_DOUBLE_3(a, b, N)` which automatically sets `atol = 1e-08` and `rtol = 1e-05`.  
+	Note: There is a shorhand macro `ALLCLOSE_DOUBLE_3(a, b, N)` which automatically sets `atol = 1e-08` and `rtol = 1e-05`. 
 
 
 To get access to those macros include `tinytest.h` (this will in addition include `<stdio.h>`).  Further library functions of intrest:
@@ -120,7 +120,7 @@ TEST_CASE(MyTest)
 {
     /* Simple check */
     int five = 2 + 3;
-    CHECK( five == 5 );
+    CHECK_EQ_INTEGER(five, 5);
 
     /* Ranged check */
     double a[] = {1, 2, 3}; 

@@ -193,15 +193,59 @@ extern "C" {
  * Checks if two double arrays are element-wise equal within a tolerance
  */
 #define ALLCLOSE_DOUBLE(a, b, N, atol, rtol) TINYTEST_INTERNAL_ALLCLOSE_DOUBLE(a, b, N, atol, rtol)
-
 #define ALLCLOSE_DOUBLE_3(a, b, N) TINYTEST_INTERNAL_ALLCLOSE_DOUBLE(a, b, N, 1e-08, 1e-05)
 
 /**
  * Checks if two float arrays are element-wise equal within a tolerance
  */
 #define ALLCLOSE_FLOAT(a, b, N, atol, rtol) TINYTEST_INTERNAL_ALLCLOSE_FLOAT(a, b, N, atol, rtol)
-
 #define ALLCLOSE_FLOAT_3(a, b, N) TINYTEST_INTERNAL_ALLCLOSE_FLOAT(a, b, N, 1e-08f, 1e-05f)
+
+/**
+ * Check for every element: a[i] == b[i]
+ */
+#define ALLCHECK_EQ_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(==, a, b, N)
+#define ALLCHECK_EQ_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(==, a, b, N)
+
+/**
+ * Check for every element: a[i] != b[i]
+ */
+#define ALLCHECK_NE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(!=, a, b, N)
+#define ALLCHECK_NE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(!=, a, b, N)
+#define ALLCHECK_NE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(!=, a, b, N)
+#define ALLCHECK_NE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(!=, a, b, N)
+
+/**
+ * Check for every element: a[i] > b[i]
+ */
+#define ALLCHECK_GT_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>, a, b, N)
+#define ALLCHECK_GT_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>, a, b, N)
+#define ALLCHECK_GT_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(>, a, b, N)
+#define ALLCHECK_GT_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(>, a, b, N)
+
+/**
+ * Check for every element: a[i] >= b[i]
+ */
+#define ALLCHECK_GE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>=, a, b, N)
+#define ALLCHECK_GE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(>=, a, b, N)
+#define ALLCHECK_GE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(>=, a, b, N)
+#define ALLCHECK_GE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(>=, a, b, N)
+
+/**
+ * Check for every element: a[i] < b[i]
+ */
+#define ALLCHECK_LT_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<, a, b, N)
+#define ALLCHECK_LT_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<, a, b, N)
+#define ALLCHECK_LT_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<, a, b, N)
+#define ALLCHECK_LT_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<, a, b, N)
+
+/**
+ * Check for every element: a[i] <= b[i]
+ */
+#define ALLCHECK_LE_FLOAT(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<=, a, b, N)
+#define ALLCHECK_LE_DOUBLE(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(<=, a, b, N)
+#define ALLCHECK_LE_INTEGER(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(<=, a, b, N)
+#define ALLCHECK_LE_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(<=, a, b, N)
 
 /**
  * @brief Checks if two integer arrays are element-wise equal
@@ -213,7 +257,8 @@ extern "C" {
  */
 #define ALLEQUAL_UNSIGNED(a, b, N) TINYTEST_INTERNAL_ALLEQUAL_UNSIGNED(a, b, N)
 
-/* --- Internal macros --- */
+/* ---------------------------------- Internal macros ------------------------------------------- */
+
 #define TINYTEST_INTERNAL_TEST_CASE(name) void name##__TINY_TEST_CASE__()
 
 /* CHECK */
@@ -316,16 +361,131 @@ extern "C" {
         tinytest_allequal_unsigned(a, b, N, #a, #b);                                               \
     } while(tinytest_isSame(0));
 
+/* ALLCHECK_X_DOUBLE */
+#define TINYTEST_INTERNAL_ALLCHECK_X_DOUBLE(CMP, a, b, N)                                          \
+    do                                                                                             \
+    {                                                                                              \
+        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
+        int numError = 0;                                                                          \
+        int printedHeader = 0;                                                                     \
+                                                                                                   \
+        for(int i = 0; i < N; ++i)                                                                 \
+        {                                                                                          \
+            if(TINYTEST_UNLIKELY(!(a[i] CMP b[i])))                                                \
+            {                                                                                      \
+                if((!numError++) || TINYTEST_PRINT_ALL)                                            \
+                {                                                                                  \
+                    if(!printedHeader)                                                             \
+                    {                                                                              \
+                        printedHeader = 1;                                                         \
+                        tinytest_printAssertFailHeader();                                          \
+                        fprintf(stderr, "%s(%i):", li.file, li.line);                              \
+                        tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
+                    }                                                                              \
+                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "%s[%i] %s %s[%i]\n", #a, i, #CMP,  \
+                                         #b, i);                                                   \
+                    fprintf(stderr, "\nwith:\n %s[%i] = %f\n  %s[%i] = %f\n\n", #a, i, a[i], #b,   \
+                            i, b[i]);                                                              \
+                }                                                                                  \
+                (*tinytest_assertErrorCounter_ptr)++;                                              \
+            }                                                                                      \
+        }                                                                                          \
+        if((numError > 1) && !TINYTEST_PRINT_ALL)                                                  \
+            fprintf(stderr, " ... failed also at %i other positon%s ... \n\n", numError - 1,       \
+                    numError == 2 ? "" : "s");                                                     \
+        (*tinytest_assertCounter_ptr) += N;                                                        \
+        fflush(stderr);                                                                            \
+    } while(tinytest_isSame(0));
+
+/* ALLCHECK_X_INTEGER */
+#define TINYTEST_INTERNAL_ALLCHECK_X_INTEGER(CMP, a, b, N)                                         \
+    do                                                                                             \
+    {                                                                                              \
+        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
+        int numError = 0;                                                                          \
+        int printedHeader = 0;                                                                     \
+                                                                                                   \
+        for(int i = 0; i < N; ++i)                                                                 \
+        {                                                                                          \
+            if(TINYTEST_UNLIKELY(!(a[i] CMP b[i])))                                                \
+            {                                                                                      \
+                if((!numError++) || TINYTEST_PRINT_ALL)                                            \
+                {                                                                                  \
+                    if(!printedHeader)                                                             \
+                    {                                                                              \
+                        printedHeader = 1;                                                         \
+                        tinytest_printAssertFailHeader();                                          \
+                        fprintf(stderr, "%s(%i):", li.file, li.line);                              \
+                        tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
+                    }                                                                              \
+                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] %s %s[%i]\n", #a, i, #CMP,\
+                                         #b, i);                                                   \
+                    fprintf(stderr, "\nwith:\n  %s[%i] = %i\n  %s[%i] = %i\n\n", #a, i, a[i], #b,  \
+                            i, b[i]);                                                              \
+                }                                                                                  \
+                (*tinytest_assertErrorCounter_ptr)++;                                              \
+            }                                                                                      \
+        }                                                                                          \
+        if((numError > 1) && !TINYTEST_PRINT_ALL)                                                  \
+            fprintf(stderr, " ... failed also at %i other positon%s ... \n\n", numError - 1,       \
+                    numError == 2 ? "" : "s");                                                     \
+        (*tinytest_assertCounter_ptr) += N;                                                        \
+        fflush(stderr);                                                                            \
+    } while(tinytest_isSame(0));
+
+/* ALLCHECK_X_INTEGER */
+#define TINYTEST_INTERNAL_ALLCHECK_X_UNSIGNED(CMP, a, b, N)                                        \
+    do                                                                                             \
+    {                                                                                              \
+        tinytest_LineInfo_t li = TINYTEST_LINEINFO;                                                \
+        int numError = 0;                                                                          \
+        int printedHeader = 0;                                                                     \
+                                                                                                   \
+        for(unsigned i = 0; i < N; ++i)                                                            \
+        {                                                                                          \
+            if(TINYTEST_UNLIKELY(!(a[i] CMP b[i])))                                                \
+            {                                                                                      \
+                if((!numError++) || TINYTEST_PRINT_ALL)                                            \
+                {                                                                                  \
+                    if(!printedHeader)                                                             \
+                    {                                                                              \
+                        printedHeader = 1;                                                         \
+                        tinytest_printAssertFailHeader();                                          \
+                        fprintf(stderr, "%s(%i):", li.file, li.line);                              \
+                        tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
+                    }                                                                              \
+                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%u] %s %s[%u]\n", #a, i, #CMP,\
+                                         #b, i);                                                   \
+                    fprintf(stderr, "\nwith:\n  %s[%u] = %u\n  %s[%u] = %u\n\n", #a, i, a[i], #b,  \
+                            i, b[i]);                                                              \
+                }                                                                                  \
+                (*tinytest_assertErrorCounter_ptr)++;                                              \
+            }                                                                                      \
+        }                                                                                          \
+        if((numError > 1) && !TINYTEST_PRINT_ALL)                                                  \
+            fprintf(stderr, " ... failed also at %i other positon%s ... \n\n", numError - 1,       \
+                    numError == 2 ? "" : "s");                                                     \
+        (*tinytest_assertCounter_ptr) += N;                                                        \
+        fflush(stderr);                                                                            \
+    } while(tinytest_isSame(0));
+
 #define REGISTER_TEST_CASE(name) YOU_NEED_TO_DEFINE_TINYTEST_MAIN_BEFORE_INCLUDING_TINYTEST
 
 /**************************************************************************************************\
  * DECLARATION
 \**************************************************************************************************/
 
+#include <stdio.h>
+
 /**
  * @brief Number of assertions
  */
 extern int* tinytest_assertCounter_ptr;
+
+/**
+ * @brief Number of failed assertions
+ */
+extern int* tinytest_assertErrorCounter_ptr;
 
 /**
  * @brief Information about the current line in the source code
@@ -388,20 +548,25 @@ extern void tinytest_allclose_float(const float* a,
                                     const char* bStr);
 
 /**
- * @brief See ALLEQUAL_INTEGER
- *
- * Relies on global variable: tinytest_lineInfo_ptr
+ * Colors
  */
-extern void
-tinytest_allequal_int(const int* a, const int* b, const int Nb, const char* aStr, const char* bStr);
+typedef enum tinytest_Color
+{
+    COLOR_DEFAULT,
+    COLOR_RED,
+    COLOR_GREEN,
+    COLOR_YELLOW
+} tinytest_Color_t;
 
 /**
- * @brief See ALLEQUAL_UNSIGNED
- *
- * Relies on global variable: tinytest_lineInfo_ptr
+ * Colored printf (internal function)
  */
-extern void tinytest_allequal_unsigned(
-    const unsigned* a, const unsigned* b, const unsigned Nb, const char* aStr, const char* bStr);
+extern void tinytest_colorPrintf(FILE* stream, tinytest_Color_t color, const char* fmt, ...);
+
+/**
+ * Print a header for an assertion (internal function)
+ */
+extern void tinytest_printAssertFailHeader();
 
 /**************************************************************************************************\
  * DEFINITION
@@ -449,13 +614,6 @@ extern void tinytest_allequal_unsigned(
         tinytest_register(#name, &name##__TINY_TEST_CASE__);                                       \
     } while(tinytest_isSame(0))
 
-typedef enum tinytest_Color {
-    COLOR_DEFAULT,
-    COLOR_RED,
-    COLOR_GREEN,
-    COLOR_YELLOW
-} tinytest_Color_t;
-
 typedef void (*tinytest_TestCaseType)(void);
 
 /* Forward declarations */
@@ -463,10 +621,8 @@ static TINYTEST_NORETURN void tinytest_fatalError(const char* str);
 static void tinytest_init(int argc, char* argv[]);
 static void tinytest_free();
 static int tinytest_run();
-static void tinytest_printAssertFailHeader();
 static void tinytest_printBar(FILE* stream, tinytest_Color_t color, int width, int newLine, char c);
 static void tinytest_register(const char* name, tinytest_TestCaseType testCase);
-static void tinytest_colorPrintf(FILE* stream, tinytest_Color_t color, const char* fmt, ...);
 static int tinytest_shouldUseColor(int stdout_is_tty);
 
 #ifdef TINYTEST_PLATFORM_WINDOWS
@@ -477,11 +633,11 @@ static const char* tinytest_getAnsiColorCode(tinytest_Color_t color);
 
 /* Global variables */
 int* tinytest_assertCounter_ptr;
+int* tinytest_assertErrorCounter_ptr;
 tinytest_LineInfo_t* tinytest_lineInfo_ptr;
 
 /* Static variables */
 static int tinytest_isInitialized = 0;
-static int tinytest_assertErrorCounter = 0;
 static int tinytest_testCounter = 0;
 static int tinytest_testErrorCounter = 0;
 static int tinytest_inColorMode = -1;
@@ -592,7 +748,10 @@ static void tinytest_init(int argc, char* argv[])
 
     tinytest_assertCounter_ptr = (int*) malloc(sizeof(int));
     tinytest_assertCounter_ptr[0] = 0;
-    tinytest_assertErrorCounter = 0;
+
+    tinytest_assertErrorCounter_ptr = (int*) malloc(sizeof(int));
+    tinytest_assertErrorCounter_ptr[0] = 0;
+
     tinytest_testErrorCounter = 0;
     tinytest_testCounter = 0;
 
@@ -622,6 +781,7 @@ static void tinytest_free()
             printf("tinytest: freeing memory\n");
 
         TINYTEST_FREE(tinytest_assertCounter_ptr);
+        TINYTEST_FREE(tinytest_assertErrorCounter_ptr);
         TINYTEST_FREE(tinytest_lineInfo_ptr);
 
         tinytest_TestCaseNode_t* node = tinytest_testCaseList_ptr->head;
@@ -657,10 +817,10 @@ static int tinytest_run()
         if(TINYTEST_VERBOSE)
             printf("tinytest: running '%s' ...\n", tinytest_curTestName);
 
-        int curError = tinytest_assertErrorCounter;
+        int curError = *tinytest_assertErrorCounter_ptr;
         node->testCase();
 
-        if(tinytest_assertErrorCounter > curError)
+        if(*tinytest_assertErrorCounter_ptr > curError)
             tinytest_testErrorCounter++;
 
         node = node->next;
@@ -683,9 +843,9 @@ static int tinytest_run()
         /* Asserts */
         fprintf(stderr, "assertions:  %6i |", *tinytest_assertCounter_ptr);
         tinytest_colorPrintf(stderr, COLOR_GREEN, "%6i passed",
-                             *tinytest_assertCounter_ptr - tinytest_assertErrorCounter);
+                             *tinytest_assertCounter_ptr - *tinytest_assertErrorCounter_ptr);
         fputs(" |", stderr);
-        tinytest_colorPrintf(stderr, COLOR_RED, "%6i failed\n", tinytest_assertErrorCounter);
+        tinytest_colorPrintf(stderr, COLOR_RED, "%6i failed\n", *tinytest_assertErrorCounter_ptr);
         /* Test cases */
         fprintf(stderr, "test cases:  %6i |", tinytest_testCounter);
         tinytest_colorPrintf(stderr, COLOR_GREEN, "%6i passed",
@@ -791,7 +951,7 @@ int tinytest_shouldUseColor(int stdout_is_tty)
  * This routine will change the color using the Win API on Windows or emitting special characters on
  * other platforms.
  */
-static void tinytest_colorPrintf(FILE* stream, tinytest_Color_t color, const char* fmt, ...)
+void tinytest_colorPrintf(FILE* stream, tinytest_Color_t color, const char* fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
@@ -850,7 +1010,7 @@ static void tinytest_colorPrintf(FILE* stream, tinytest_Color_t color, const cha
  *
  * Relies on tinytest_lineInfo_ptr
  */
-static void tinytest_printAssertFailHeader()
+void tinytest_printAssertFailHeader()
 {
     if(!tinytest_printedHeader++)
     {
@@ -863,14 +1023,14 @@ static void tinytest_printAssertFailHeader()
 /**
  * @brief Print a failed assertion
  *
- * Relies tinytest_lineInfo_ptr to retrive the line-info
+ * Relies tinytest_lineInfo_ptr
  */
 void tinytest_assertFail(const char* exprStr, ...)
 {
     va_list args;
     va_start(args, exprStr);
 
-    tinytest_assertErrorCounter++;
+    (*tinytest_assertErrorCounter_ptr)++;
     tinytest_printAssertFailHeader();
 
     fprintf(stderr, "%s(%i):", tinytest_lineInfo_ptr->file, tinytest_lineInfo_ptr->line);
@@ -945,7 +1105,7 @@ void tinytest_allclose_##type(const type* a, const type* b, const int N, const t
                                 atol, rtol, aStr, i, a[i], bStr, i, b[i]);                         \
                     }                                                                              \
                 }                                                                                  \
-                tinytest_assertErrorCounter++;                                                     \
+                (*tinytest_assertErrorCounter_ptr)++;                                              \
             }                                                                                      \
         }                                                                                          \
         if((numError > 1) && !TINYTEST_PRINT_ALL)                                                  \
@@ -953,52 +1113,10 @@ void tinytest_allclose_##type(const type* a, const type* b, const int N, const t
                     numError == 2 ? "" : "s");                                                     \
         (*tinytest_assertCounter_ptr) += N;                                                        \
         fflush(stderr);                                                                            \
-    \
 }
 
 TINYTEST_ALLCLOSE_IMPL(double)
 TINYTEST_ALLCLOSE_IMPL(float)
-
-/* spec is the identifier for printf */
-#define TINYTEST_ALLEQUAL_IMPL(type, spec)                                                         \
-void tinytest_allequal_##type(const type* a, const type* b, const type N, const char* aStr,        \
-                              const char* bStr)                                                    \
-{                                                                                                  \
-        tinytest_LineInfo_t li = *tinytest_lineInfo_ptr;                                           \
-        int numError = 0;                                                                          \
-        int printedHeader = 0;                                                                     \
-                                                                                                   \
-        for(type i = 0; i < N; ++i)                                                                \
-        {                                                                                          \
-            if(a[i] != b[i])                                                                       \
-            {                                                                                      \
-                if((!numError++) || TINYTEST_PRINT_ALL)                                            \
-                {                                                                                  \
-                    if(!printedHeader)                                                             \
-                    {                                                                              \
-                        printedHeader = 1;                                                         \
-                        tinytest_printAssertFailHeader();                                          \
-                        fprintf(stderr, "%s(%i):", li.file, li.line);                              \
-                        tinytest_colorPrintf(stderr, COLOR_RED, " FAILED: \n\n");                  \
-                    }                                                                              \
-                    tinytest_colorPrintf(stderr, COLOR_YELLOW, "\t%s[%i] != %s[%i]\n", aStr, i,    \
-                                         bStr, i, bStr);                                           \
-                    fprintf(stderr, "\nwith:\n  %s[%i] = %" #spec "\n  %s[%i] = %" #spec "\n\n",   \
-                            aStr, i, a[i], bStr, i, b[i]);                                         \
-                }                                                                                  \
-                tinytest_assertErrorCounter++;                                                     \
-            }                                                                                      \
-        }                                                                                          \
-        if((numError > 1) && !TINYTEST_PRINT_ALL)                                                  \
-            fprintf(stderr, " ... failed also at %i other positon%s ... \n\n", numError - 1,       \
-                    numError == 2 ? "" : "s");                                                     \
-        (*tinytest_assertCounter_ptr) += N;                                                        \
-        fflush(stderr);                                                                            \
-    \
-}
-
-TINYTEST_ALLEQUAL_IMPL(int, i)
-TINYTEST_ALLEQUAL_IMPL(unsigned, u)
 
 #endif /* TINYTEST_MAIN */
 
