@@ -114,6 +114,30 @@ int main(int argc, char* argv[])
     REGISTER_TEST_CASE(CheckLesserEqualUnsigned);
     REGISTER_TEST_CASE(CheckLesserEqualUnsignedFails);
 
+    /* test-allcheck-eq.c */
+    REGISTER_TEST_CASE(AllCheckEqualInteger_Small);
+    REGISTER_TEST_CASE(AllCheckEqualInteger_Large);
+    REGISTER_TEST_CASE(AllCheckEqualInteger_Array);
+    REGISTER_TEST_CASE(AllCheckEqualInteger_Fails);
+    REGISTER_TEST_CASE(AllCheckEqualUnsigned_Small);
+    REGISTER_TEST_CASE(AllCheckEqualUnsigned_Large);
+    REGISTER_TEST_CASE(AllCheckEqualUnsigned_Array);
+    REGISTER_TEST_CASE(AllCheckEqualUnsigned_Fails);
+
+    /* test-allcheck-ne.c */
+    REGISTER_TEST_CASE(AllCheckNotEqualInteger_Small);
+    REGISTER_TEST_CASE(AllCheckNotEqualInteger_Large);
+    REGISTER_TEST_CASE(AllCheckNotEqualInteger_Array);
+    REGISTER_TEST_CASE(AllCheckNotEqualInteger_Fails);
+    REGISTER_TEST_CASE(AllCheckNotEqualUnsigned_Small);
+    REGISTER_TEST_CASE(AllCheckNotEqualUnsigned_Large);
+    REGISTER_TEST_CASE(AllCheckNotEqualUnsigned_Array);
+    REGISTER_TEST_CASE(AllCheckNotEqualUnsigned_Fails);
+    REGISTER_TEST_CASE(AllCheckNotEqualDouble_Small);
+    REGISTER_TEST_CASE(AllCheckNotEqualDouble_Large);
+    REGISTER_TEST_CASE(AllCheckNotEqualDouble_Array);
+    REGISTER_TEST_CASE(AllCheckNotEqualDouble_Fails);
+
     /* test-allclose-double.c */
     REGISTER_TEST_CASE(AllcloseDouble_Small);
     REGISTER_TEST_CASE(AllcloseDouble_Large);
@@ -127,19 +151,7 @@ int main(int argc, char* argv[])
     REGISTER_TEST_CASE(AllcloseFloat_Array);
     REGISTER_TEST_CASE(AllcloseFloat_Infinity);
     REGISTER_TEST_CASE(AllcloseFloat_Fails);
-    
-    /* test-allequal-integer.c */
-    REGISTER_TEST_CASE(AllequalInteger_Small);
-    REGISTER_TEST_CASE(AllequalInteger_Large);
-    REGISTER_TEST_CASE(AllequalInteger_Array);
-    REGISTER_TEST_CASE(AllequalInteger_Fails);    
-    
-    /* test-allequal-unsigned.c */
-    REGISTER_TEST_CASE(AllequalUnsigned_Small);
-    REGISTER_TEST_CASE(AllequalUnsigned_Large);
-    REGISTER_TEST_CASE(AllequalUnsigned_Array);
-    REGISTER_TEST_CASE(AllequalUnsigned_Fails);
-    
+
     /* test-main-arg.c */
     REGISTER_TEST_CASE(MainArg_Check);
     REGISTER_TEST_CASE(MainArg_Fails);

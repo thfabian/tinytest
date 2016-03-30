@@ -34,10 +34,14 @@ set(TINYTEST_SOURCE
     test-check-ge.c
     test-check-lt.c
     test-check-le.c
+    test-allcheck-eq.c
+    test-allcheck-ne.c
+    test-allcheck-gt.c
+    test-allcheck-ge.c
+    test-allcheck-lt.c
+    test-allcheck-le.c
     test-allclose-double.c
     test-allclose-float.c
-    test-allequal-integer.c
-    test-allequal-unsigned.c
     test-main-arg.c
 )
 
