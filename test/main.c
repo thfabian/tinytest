@@ -137,6 +137,82 @@ int main(int argc, char* argv[])
     REGISTER_TEST_CASE(AllCheckNotEqualDouble_Large);
     REGISTER_TEST_CASE(AllCheckNotEqualDouble_Array);
     REGISTER_TEST_CASE(AllCheckNotEqualDouble_Fails);
+    REGISTER_TEST_CASE(AllCheckNotEqualFloat_Small);
+    REGISTER_TEST_CASE(AllCheckNotEqualFloat_Large);
+    REGISTER_TEST_CASE(AllCheckNotEqualFloat_Array);
+    REGISTER_TEST_CASE(AllCheckNotEqualFloat_Fails);
+    
+    /* test-allcheck-gt.c */
+    REGISTER_TEST_CASE(AllCheckGreaterThanInteger_Small);
+    REGISTER_TEST_CASE(AllCheckGreaterThanInteger_Large);
+    REGISTER_TEST_CASE(AllCheckGreaterThanInteger_Array);
+    REGISTER_TEST_CASE(AllCheckGreaterThanInteger_Fails);
+    REGISTER_TEST_CASE(AllCheckGreaterThanUnsigned_Small);
+    REGISTER_TEST_CASE(AllCheckGreaterThanUnsigned_Large);
+    REGISTER_TEST_CASE(AllCheckGreaterThanUnsigned_Array);
+    REGISTER_TEST_CASE(AllCheckGreaterThanUnsigned_Fails);
+    REGISTER_TEST_CASE(AllCheckGreaterThanDouble_Small);
+    REGISTER_TEST_CASE(AllCheckGreaterThanDouble_Large);
+    REGISTER_TEST_CASE(AllCheckGreaterThanDouble_Array);
+    REGISTER_TEST_CASE(AllCheckGreaterThanDouble_Fails);
+    REGISTER_TEST_CASE(AllCheckGreaterThanFloat_Small);
+    REGISTER_TEST_CASE(AllCheckGreaterThanFloat_Large);
+    REGISTER_TEST_CASE(AllCheckGreaterThanFloat_Array);
+    REGISTER_TEST_CASE(AllCheckGreaterThanFloat_Fails);
+    
+    /* test-allcheck-ge.c */
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanInteger_Small);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanInteger_Large);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanInteger_Array);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanInteger_Fails);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanUnsigned_Small);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanUnsigned_Large);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanUnsigned_Array);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanUnsigned_Fails);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanDouble_Small);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanDouble_Large);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanDouble_Array);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanDouble_Fails);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanFloat_Small);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanFloat_Large);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanFloat_Array);
+    REGISTER_TEST_CASE(AllCheckGreaterEqualThanFloat_Fails);
+    
+    /* test-allcheck-lt.c */
+    REGISTER_TEST_CASE(AllCheckLesserThanInteger_Small);
+    REGISTER_TEST_CASE(AllCheckLesserThanInteger_Large);
+    REGISTER_TEST_CASE(AllCheckLesserThanInteger_Array);
+    REGISTER_TEST_CASE(AllCheckLesserThanInteger_Fails);
+    REGISTER_TEST_CASE(AllCheckLesserThanUnsigned_Small);
+    REGISTER_TEST_CASE(AllCheckLesserThanUnsigned_Large);
+    REGISTER_TEST_CASE(AllCheckLesserThanUnsigned_Array);
+    REGISTER_TEST_CASE(AllCheckLesserThanUnsigned_Fails);
+    REGISTER_TEST_CASE(AllCheckLesserThanDouble_Small);
+    REGISTER_TEST_CASE(AllCheckLesserThanDouble_Large);
+    REGISTER_TEST_CASE(AllCheckLesserThanDouble_Array);
+    REGISTER_TEST_CASE(AllCheckLesserThanDouble_Fails);
+    REGISTER_TEST_CASE(AllCheckLesserThanFloat_Small);
+    REGISTER_TEST_CASE(AllCheckLesserThanFloat_Large);
+    REGISTER_TEST_CASE(AllCheckLesserThanFloat_Array);
+    REGISTER_TEST_CASE(AllCheckLesserThanFloat_Fails);
+    
+    /* test-allcheck-le.c */
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanInteger_Small);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanInteger_Large);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanInteger_Array);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanInteger_Fails);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanUnsigned_Small);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanUnsigned_Large);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanUnsigned_Array);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanUnsigned_Fails);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanDouble_Small);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanDouble_Large);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanDouble_Array);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanDouble_Fails);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanFloat_Small);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanFloat_Large);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanFloat_Array);
+    REGISTER_TEST_CASE(AllCheckLesserEqualThanFloat_Fails);
 
     /* test-allclose-double.c */
     REGISTER_TEST_CASE(AllcloseDouble_Small);

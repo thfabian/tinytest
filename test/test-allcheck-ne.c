@@ -26,7 +26,6 @@
  */
  
 #include "tinytest.h"
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -250,6 +249,82 @@ TEST_CASE(AllCheckNotEqualDouble_Fails)
     bb[N/2] = bb[N/4] = -1;
 
     ALLCHECK_NE_DOUBLE(aa, bb, N);
+    
+    free(aa);
+    free(bb);
+#endif
+}
+
+#undef MALLOC_ARRAY
+
+/* ----------------------------------------- Float ---------------------------------------------- */
+
+#define MALLOC_ARRAY(N) (float*) malloc((N) * sizeof(float))
+
+ TEST_CASE(AllCheckNotEqualFloat_Small)
+{
+    const int N = 3;
+    
+    float* aa = MALLOC_ARRAY(N);
+    float* bb = MALLOC_ARRAY(N);
+    
+    for(int i = 0; i < N; ++i)
+    {
+        aa[i] = rand() * 2.2f;
+        bb[i] = rand() * 2.2f;
+    }
+
+    ALLCHECK_NE_FLOAT(aa, bb, N);
+    
+    free(aa);
+    free(bb);
+}
+
+TEST_CASE(AllCheckNotEqualFloat_Large)
+{
+    const int N = 1024;
+    
+    float* aa = MALLOC_ARRAY(N);
+    float* bb = MALLOC_ARRAY(N);
+    
+    for(int i = 0; i < N; ++i)
+    {
+        aa[i] = rand() * 2.2f;
+        bb[i] = rand() * 2.2f;
+    }
+
+    ALLCHECK_NE_FLOAT(aa, bb, N);
+    
+    free(aa);
+    free(bb);
+}
+
+TEST_CASE(AllCheckNotEqualFloat_Array)
+{
+    float aa[] = {1, 2, 3}; 
+    float bb[] = {4, 5, 6};
+
+    ALLCHECK_NE_FLOAT(aa, bb, 3);
+}
+
+TEST_CASE(AllCheckNotEqualFloat_Fails)
+{
+#ifdef TEST_FAILS
+    const int N = 1024;
+    
+    float* aa = MALLOC_ARRAY(N);
+    float* bb = MALLOC_ARRAY(N);
+    
+    for(int i = 0; i < N; ++i)
+    {
+        aa[i] = rand() * 2.2f;
+        bb[i] = rand() * 2.2f;
+    }
+
+    aa[N/4] = aa[N/2] = -1;
+    bb[N/2] = bb[N/4] = -1;
+
+    ALLCHECK_NE_FLOAT(aa, bb, N);
     
     free(aa);
     free(bb);

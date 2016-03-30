@@ -824,13 +824,14 @@ static int tinytest_run()
 
         /* Asserts */
         fprintf(stderr, "assertions:  %6i |", *tinytest_assertCounter_ptr);
-        tinytest_colorPrintf(stderr, COLOR_GREEN, "%6i passed",
+        tinytest_colorPrintf(stderr, COLOR_GREEN, " %6i passed",
                              *tinytest_assertCounter_ptr - *tinytest_assertErrorCounter_ptr);
         fputs(" |", stderr);
         tinytest_colorPrintf(stderr, COLOR_RED, "%6i failed\n", *tinytest_assertErrorCounter_ptr);
+        
         /* Test cases */
         fprintf(stderr, "test cases:  %6i |", tinytest_testCounter);
-        tinytest_colorPrintf(stderr, COLOR_GREEN, "%6i passed",
+        tinytest_colorPrintf(stderr, COLOR_GREEN, " %6i passed",
                              tinytest_testCounter - tinytest_testErrorCounter);
         fputs(" |", stderr);
         tinytest_colorPrintf(stderr, COLOR_RED, "%6i failed\n", tinytest_testErrorCounter);

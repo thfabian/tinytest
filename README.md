@@ -57,14 +57,14 @@ The perform the _actual_ testing the library offers several macros:
 
 	| *Assertion* | *Types* | *Verifies* |
 |:--------------------|:-------------|:-------------:|
-|`ALLCHECK_EQ_[TYPE](a, b);`| `INTEGER, UNSIGNED` | `a[i] == b[i]` |
-|`ALLCHECK_NE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] != b[i]` |
-|`ALLCHECK_GT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] > b[i]` |
-|`ALLCHECK_GE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] >= b[i]` |
-|`ALLCHECK_LT_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] < b[i]` |
-|`ALLCHECK_LE_[TYPE](a, b);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] <= b[i]` |
+|`ALLCHECK_EQ_[TYPE](a, b, N);`| `INTEGER, UNSIGNED` | `a[i] == b[i]` |
+|`ALLCHECK_NE_[TYPE](a, b, N);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] != b[i]` |
+|`ALLCHECK_GT_[TYPE](a, b, N);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] > b[i]` |
+|`ALLCHECK_GE_[TYPE](a, b, N);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] >= b[i]` |
+|`ALLCHECK_LT_[TYPE](a, b, N);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] < b[i]` |
+|`ALLCHECK_LE_[TYPE](a, b, N);`| `DOUBLE, FLOAT, INTEGER, UNSIGNED` | `a[i] <= b[i]` |
 
-	If an assertion fails, an error message will be printed to stderr and the execution _continues_. Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`. 
+	Only the _first_ error will create a detailed diagnostic message, to alter this behaviour define `TINYTEST_PRINT_ALL` before including `tinytest.h`. 
 	
 * `ALLCLOSE_DOUBLE(a, b, N, atol, rtol)` and `ALLCLOSE_FLOAT(a, b, N, atol, rtol)` 
 
