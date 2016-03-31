@@ -244,7 +244,7 @@ extern "C" {
 
 #define ALLCLOSE_FLOAT_MSG(a, b, N, atol, rtol, msg)                                               \
     TINYTEST_INTERNAL_ALLCLOSE_X(float , a, b, N, atol, rtol, msg)
-#define ALLCLOSE_FLOAT_3_MSG(a, b, N)                                                              \
+#define ALLCLOSE_FLOAT_3_MSG(a, b, N, msg)                                                              \
     TINYTEST_INTERNAL_ALLCLOSE_X(float, a, b, N, 1e-08, 1e-05, msg)
 
 /**
@@ -585,6 +585,11 @@ extern "C" {
 /**************************************************************************************************\
  * DECLARATION
 \**************************************************************************************************/
+
+#ifdef TINYTEST_COMPILER_MSVC
+#pragma warning(disable : 4996)
+#pragma warning(disable : 4477)
+#endif
 
 #include <math.h>
 #include <stdio.h>
