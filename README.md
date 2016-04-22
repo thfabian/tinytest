@@ -1,4 +1,4 @@
-## tinytest - C testing framework (0.0.2) [![Build Status](https://travis-ci.org/thfabian/tinytest.svg?branch=master)](https://travis-ci.org/thfabian/tinytest)
+# tinytest - C testing framework (0.0.2) [![Build Status](https://travis-ci.org/thfabian/tinytest.svg?branch=master)](https://travis-ci.org/thfabian/tinytest)
 
 ### DESCRIPTION
 
