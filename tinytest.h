@@ -115,6 +115,9 @@ extern "C" {
 
 #ifndef TINYTEST_PRINT_ALL
 #define TINYTEST_PRINT_ALL 0
+#else
+#undef TINYTEST_PRINT_ALL
+#define TINYTEST_PRINT_ALL 1
 #endif
 
 #ifdef TINYTEST_COMPILER_MSVC
@@ -232,7 +235,7 @@ extern "C" {
 
 #define ALLCLOSE_DOUBLE_MSG(a, b, N, atol, rtol, msg)                                              \
     TINYTEST_INTERNAL_ALLCLOSE_X(double , a, b, N, atol, rtol, msg)
-#define ALLCLOSE_DOUBLE_3_MSG(a, b, N, msg)                                                        \
+#define ALLCLOSE_DOUBLE_3_MSG(a, b, N, msg)                                                             \
     TINYTEST_INTERNAL_ALLCLOSE_X(double, a, b, N, 1e-08, 1e-05, msg)
 
 /**
